@@ -7,4 +7,9 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="activity_login_edittext_email">Email</string>
+    <string name="activity_login_edittext_contrasena">Contraseña</string>
+    <string name="activity_login_button_inicia">Iniciar sesión</string>
+    <string name="activity_login_textview_registro">¿No tienes cuenta? Registrate</string>
+    <string name="activity_login_button_facebook">Inicia con Facebook</string>
 </resources>
