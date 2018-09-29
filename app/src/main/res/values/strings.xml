@@ -12,4 +12,5 @@
     <string name="activity_login_button_inicia">Iniciar sesión</string>
     <string name="activity_login_textview_registro">¿No tienes cuenta? Registrate</string>
     <string name="activity_login_button_facebook">Inicia con Facebook</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
