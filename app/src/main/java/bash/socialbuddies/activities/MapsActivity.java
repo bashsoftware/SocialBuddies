@@ -1,4 +1,4 @@
-package bash.socialbuddies;
+package bash.socialbuddies.activities;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -13,6 +13,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+
+import bash.socialbuddies.R;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
