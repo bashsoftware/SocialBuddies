@@ -16,7 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import org.w3c.dom.Text;
 
-import bash.socialbuddies.MapsActivity;
+import bash.socialbuddies.activities.MapsActivity;
 import bash.socialbuddies.R;
 import bash.socialbuddies.utilities.FirebaseReference;
 
