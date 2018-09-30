@@ -47,10 +47,12 @@ public class DataBaseUtil {
 
 
     public void obtieneIncidentes(final FragmentBusqueda callback, final String clave){
-        DatabaseReference ref = database.getReference().child(FirebaseReference.INCIDENTES);
+        DatabaseReference ref = null;
 
-        if(clave.isEmpty()){
-            ref.child("clave");
+        if(!clave.isEmpty()){
+            ref = database.getReference().child(FirebaseReference.INCIDENTES + "/" + clave);
+        }else {
+            ref = database.getReference().child(FirebaseReference.INCIDENTES);
         }
         ref.addValueEventListener(new ValueEventListener() {
             @Override
