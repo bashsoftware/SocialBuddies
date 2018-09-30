@@ -7,21 +7,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <EditText
         android:id="@+id/fragment_registro_problema_titulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Titulo"
         android:lines="1"/>
-    <TextView
+    <EditText
+        android:inputType="textMultiLine"
         android:id="@+id/fragment_registro_problema_descripcion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Descripcion"
-        android:lines="10"/>
+        android:maxLines="10"
+        android:minLines="2"/>
     <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
+
         <Button
             android:id="@+id/fragment_registro_problema_coordenadas"
             android:layout_width="wrap_content"
@@ -32,6 +36,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Registrar"/>
-    </LinearLayout>
-</LinearLayout>
+    </LinearLayout></LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

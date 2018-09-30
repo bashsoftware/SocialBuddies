@@ -13,8 +13,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,6 +25,7 @@ import bash.socialbuddies.R;
 import bash.socialbuddies.beans.BeanUsuario;
 import bash.socialbuddies.fragments.FragmentContenidoPublicaciones;
 import bash.socialbuddies.fragments.FragmentVacio;
+import bash.socialbuddies.fragments.FragmentNuevoRegistroProblema;
 import bash.socialbuddies.utilities.FirebaseReference;
 import bash.socialbuddies.utilities.Singleton;
 
@@ -110,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (itemId) {
             case R.id.main_activity_menu_drawer_mapa:
-                intent = new Intent(getApplicationContext(), MapsActivity.class);
+                intent = new Intent(getApplicationContext(), MapsActivityLugares.class);
                 break;
 
             case R.id.main_activity_menu_drawer_publicaciones:
@@ -129,7 +128,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.main_activity_menu_drawer__cerrar:
-                logout();
+              //  logout();
+              fragment = new FragmentNuevoRegistroProblema();
                 break;
 
         }
