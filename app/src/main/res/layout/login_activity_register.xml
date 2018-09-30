@@ -6,37 +6,72 @@
     android:orientation="vertical"
     tools:context=".activities.LoginActivity">
 
-        <EditText
-            android:id="@+id/edtEmailRegister"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Email"
+    <LinearLayout
+        android:id="@+id/layDatos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.6"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/edtEmailRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:textAlignment="center"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/colorPrimary"
+                android:textColorHint="@color/colorPrimary"
+                />
+
+            <EditText
+                android:layout_below="@id/edtEmailRegister"
+                android:id="@+id/edtPassRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Contraseña"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:textAlignment="center"
+                android:inputType="textPassword"
+                android:textColor="@color/colorPrimary"
+                android:textColorHint="@color/colorPrimary"/>
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/imgPerfil"
+            android:layout_width="0dp"
+            android:layout_height="200px"
+            android:layout_weight="0.4"
             android:layout_margin="10dp"
-            android:padding="10dp"
-            android:textAlignment="center"
-            android:inputType="textEmailAddress"
-            />
+            android:background="@color/textIcons"
+            android:src="@drawable/perfil"
+            android:scaleType="centerInside"/>
+
+    </LinearLayout>
+
+
 
         <EditText
-            android:layout_below="@id/edtEmailRegister"
-            android:id="@+id/edtPassRegister"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Contraseña"
-            android:layout_margin="10dp"
-            android:padding="10dp"
-            android:textAlignment="center"
-            android:inputType="textPassword"/>
-
-        <EditText
-            android:layout_below="@id/edtPassRegister"
+            android:layout_below="@id/layDatos"
             android:id="@+id/edtNombreRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nombre"
             android:layout_margin="10dp"
             android:padding="10dp"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textColorHint="@color/colorPrimary"/>
 
         <EditText
             android:layout_below="@id/edtNombreRegister"
@@ -46,7 +81,9 @@
             android:hint="Apellidos"
             android:layout_margin="10dp"
             android:padding="10dp"
-            android:textAlignment="center"/>
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textColorHint="@color/colorPrimary"/>
 
         <EditText
             android:layout_below="@id/edtApellidoRegister"
@@ -57,21 +94,20 @@
             android:layout_margin="10dp"
             android:padding="10dp"
             android:textAlignment="center"
-            android:inputType="number"/>
+            android:inputType="number"
+            android:textColor="@color/colorPrimary"
+            android:textColorHint="@color/colorPrimary"/>
 
-    <ImageButton
-        android:id="@+id/imgPerfil"
-        android:layout_below="@id/edtEdadRegister"
-        android:layout_width="match_parent"
-        android:layout_height="200px" />
+
 
         <Button
             android:id="@+id/btnRegister"
-            android:layout_below="@id/imgPerfil"
+            android:layout_below="@id/edtEdadRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Registrar"
             android:padding="10dp"
-            android:layout_margin="10dp"/>
+            android:layout_margin="10dp"
+            android:background="@drawable/radius_button"/>
 
 </RelativeLayout>
