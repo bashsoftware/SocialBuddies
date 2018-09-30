@@ -37,12 +37,12 @@
         android:text="@string/activity_login_textview_registro"
         android:padding="10dp"/>
 
-    <Button
-        android:id="@+id/btnFacebook"
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="@string/activity_login_button_facebook"/>
+        android:padding="10dp"
+        android:layout_margin="10dp"/>
 
 
 </LinearLayout>
