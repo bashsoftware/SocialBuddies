@@ -22,8 +22,8 @@ import java.util.Collections;
 
 import bash.socialbuddies.R;
 import bash.socialbuddies.activities.ActivityContenido;
-import bash.socialbuddies.adapters.AdaptadorPublicaciones;
-import bash.socialbuddies.beans.BeanPublicacion;
+import bash.socialbuddies.adapters.AdaptadorIncidentes;
+import bash.socialbuddies.beans.BeanIncidente;
 import bash.socialbuddies.beans.BeanUsuario;
 import bash.socialbuddies.utilities.FirebaseReference;
 import bash.socialbuddies.utilities.Singleton;
@@ -37,8 +37,8 @@ public class FragmentContenidoPublicaciones extends Fragment {
     private View view;
     private RecyclerView recyclerView;
     private FloatingActionButton floatingActionButton;
-    private ArrayList<BeanPublicacion> list;
-    private AdaptadorPublicaciones adaptador;
+    private ArrayList<BeanIncidente> list;
+    private AdaptadorIncidentes adaptador;
 
     @Nullable
     @Override
@@ -51,7 +51,7 @@ public class FragmentContenidoPublicaciones extends Fragment {
 
         list = new ArrayList<>();
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adaptador = new AdaptadorPublicaciones(list);
+        adaptador = new AdaptadorIncidentes(list);
         recyclerView.setAdapter(adaptador);
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +75,7 @@ public class FragmentContenidoPublicaciones extends Fragment {
         list = new ArrayList<>();
         count = 0;
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(FirebaseReference.PUBLICACIONES);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(FirebaseReference.INCIDENTES);
 
         if (id != null) {
             reference = reference.child(id);
@@ -88,16 +88,16 @@ public class FragmentContenidoPublicaciones extends Fragment {
                 if (id != null) {
                     for (final DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         for (final DataSnapshot snapshot1 : snapshot.getChildren()) {
-                            final BeanPublicacion beanPublicacion = snapshot1.getValue(BeanPublicacion.class);
-                            beanPublicacion.setIdPublicacion(snapshot1.getKey());
+                            final BeanIncidente beanPublicacion = snapshot1.getValue(BeanIncidente.class);
+                            beanPublicacion.setInc_id(snapshot1.getKey());
                             list.add(beanPublicacion);
                         }
                     }
                 } else {
                     for (final DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         for (final DataSnapshot snapshot1 : snapshot.getChildren()) {
-                            final BeanPublicacion beanPublicacion = snapshot1.getValue(BeanPublicacion.class);
-                            beanPublicacion.setIdPublicacion(snapshot1.getKey());
+                            final BeanIncidente beanPublicacion = snapshot1.getValue(BeanIncidente.class);
+                            beanPublicacion.setInc_id(snapshot1.getKey());
                             list.add(beanPublicacion);
                         }
                     }
@@ -121,10 +121,10 @@ public class FragmentContenidoPublicaciones extends Fragment {
 
         for (int i = 0; i < list.size(); i++) {
 
-            final BeanPublicacion publicacion = list.get(i);
+            final BeanIncidente publicacion = list.get(i);
             final int finalI = i;
 
-            reference.child(publicacion.getIdPublicacion()).addValueEventListener(new ValueEventListener() {
+            reference.child(publicacion.getInc_id()).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     long l = dataSnapshot.getChildrenCount();
@@ -156,10 +156,10 @@ public class FragmentContenidoPublicaciones extends Fragment {
 
         for (int i = 0; i < list.size(); i++) {
 
-            final BeanPublicacion publicacion = list.get(i);
+            final BeanIncidente publicacion = list.get(i);
             final int finalI = i;
 
-            reference.child(publicacion.getIdPublicacion()).addValueEventListener(new ValueEventListener() {
+            reference.child(publicacion.getInc_id()).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     long l = dataSnapshot.getChildrenCount();

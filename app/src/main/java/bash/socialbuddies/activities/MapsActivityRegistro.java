@@ -225,6 +225,7 @@ public class MapsActivityRegistro extends FragmentActivity implements OnMapReady
         }
         poly.color(Color.rgb(3, 169, 244));
         poly.add(rangos.get(0).getPosition());
+        poly.add(rangos.get(0).getPosition());
         mMap.addCircle(circle);
         mMap.addMarker(new MarkerOptions().position(latLng).icon(BitmapDescriptorFactory.fromResource(R.drawable.a)));
         mMap.addPolyline(poly);

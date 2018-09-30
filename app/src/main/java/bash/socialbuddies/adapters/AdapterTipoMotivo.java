@@ -44,7 +44,8 @@ public class AdapterTipoMotivo extends RecyclerView.Adapter<AdapterTipoMotivo.Ti
         viewHolder._imgIcono.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(_context, "dawd" + _motivosArray.get(position).getMot_tipo(), Toast.LENGTH_SHORT);
+                _callBack.onSelectTipo(_motivosArray.get(position).getMot_tipo());
+                //Toast.makeText(_context, "dawd" + _motivosArray.get(position).getMot_tipo(), Toast.LENGTH_SHORT);
             }
         });
     }
