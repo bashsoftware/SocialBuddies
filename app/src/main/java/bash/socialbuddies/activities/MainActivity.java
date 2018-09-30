@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.main_activity_menu_drawer__cerrar:
-        fragment = new FragmentNuevoRegistroProblema();
+                logout();
                 break;
 
         }
