@@ -1,6 +1,7 @@
 package bash.socialbuddies.activities;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
@@ -54,7 +55,6 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         button = (FloatingActionButton) findViewById(R.id.activity_maps_float);
-
 
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -123,6 +123,23 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
         mMap = googleMap;
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(25.544846, -103.406460), 13));
         incidentes = new ArrayList<>();
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                for(BeanIncidente incidente:incidentes){
+                    if(incidente.getUbicacion().getLat() == marker.getPosition().latitude && incidente.getUbicacion().getLng() == marker.getPosition().longitude )
+                    {
+                        Intent intent = new Intent(getApplicationContext(), ActivityContenido.class);
+                        intent.putExtra(ActivityContenido.ESTATUS, ActivityContenido.INCIDENTE);
+                        intent.putExtra(ActivityContenido.INCIDENTE_FILTRO, incidente);
+                        startActivity(intent);
+
+                    }
+                }
+                return  false;
+            }
+
+        });
 
         reference = FirebaseDatabase.getInstance().getReference(FirebaseReference.INCIDENTES);
         reference.child("Choques").addValueEventListener(new ValueEventListener() {
@@ -235,16 +252,9 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
         mMap.addPolyline(poly);
 
     }
-    void setMarkers(){
+    void setMarkers() {
         lineas = new PolylineOptions();
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                Toast.makeText(getApplicationContext(), "toast" + marker.getPosition(), Toast.LENGTH_SHORT).show();
 
-                return false;
-            }
-        });
 
 
 ArrayList<ArrayList<LatLng>> circulos = new ArrayList<>();
