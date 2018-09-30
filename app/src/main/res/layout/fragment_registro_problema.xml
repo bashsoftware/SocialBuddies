@@ -55,12 +55,16 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <Button
+            android:id="@+id/fragment_registro_problema_imgs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Añadir Imagenes"/>  <Button
             android:id="@+id/fragment_registro_problema_coordenadas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Dar Posicion"/>
+
         <Button
             android:id="@+id/fragment_registro_problema_enviar"
             android:layout_width="wrap_content"
