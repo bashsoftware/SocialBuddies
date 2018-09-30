@@ -131,12 +131,7 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
                     if (incidente.getUbicacion().getLat() == marker.getPosition().latitude && incidente.getUbicacion().getLng() == marker.getPosition().longitude) {
                         Intent intent = new Intent(getApplicationContext(), ActivityContenido.class);
 
-                        Bundle bundle = new Bundle();
-                        bundle.putInt(ActivityContenido.ESTATUS, ActivityContenido.INCIDENTE);
-                        bundle.putSerializable(ActivityContenido.INCIDENTE_FILTRO, incidente);
-                        intent.putExtras(bundle);
 
-                        startActivity(intent);
                     }
                 }
                 return false;
@@ -226,21 +221,6 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
         return d * 1000; // meters
     }
 
-    void areaMarcadores() {
-        mMap.clear();
-
-        PolylineOptions poly = new PolylineOptions();
-        for (MarkerOptions m : rangos) {
-            mMap.addMarker(m);
-            poly.add(m.getPosition());
-        }
-        poly.color(Color.rgb(3, 169, 244));
-        poly.add(rangos.get(0).getPosition());
-
-
-        mMap.addPolyline(poly);
-
-    }
 
     void dibujarLineas(CircleOptions circle, LatLng latLng) {
 
@@ -251,7 +231,6 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
         poly.color(Color.rgb(3, 169, 244));
         poly.add(rangos.get(0).getPosition());
         mMap.addCircle(circle);
-
         mMap.addMarker(new MarkerOptions().position(latLng).icon(BitmapDescriptorFactory.fromResource(R.drawable.a)));
         mMap.addPolyline(poly);
 
