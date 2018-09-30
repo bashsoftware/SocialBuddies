@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import bash.socialbuddies.R;
+import bash.socialbuddies.fragments.FragmentBusqueda;
 import bash.socialbuddies.fragments.FragmentVacio;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.main_activity_menu_drawer_lista:
-                fragment = new FragmentVacio();
+                fragment = new FragmentBusqueda();
                 break;
 
             case R.id.main_activity_menu_drawer_config:
