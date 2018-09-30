@@ -23,6 +23,7 @@ import bash.socialbuddies.adapters.AdapterIncidenteLista;
 import bash.socialbuddies.adapters.AdapterTipoMotivo;
 import bash.socialbuddies.beans.BeanIncidente;
 import bash.socialbuddies.beans.BeanMotivo;
+import bash.socialbuddies.behavior.ItemClickSupport;
 import bash.socialbuddies.interfaces.*;
 import bash.socialbuddies.utilities.FirebaseReference;
 
@@ -32,6 +33,7 @@ public class FragmentBusqueda extends Fragment implements OnCallBackBusqueda, On
     private AdapterTipoMotivo _adapterTipoMotivo;
     private AdapterIncidenteLista _adapterIncidentes;
     private DataBaseUtil dbUtil;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -42,10 +44,16 @@ public class FragmentBusqueda extends Fragment implements OnCallBackBusqueda, On
         _recyclerIncidentes = view.findViewById(R.id.rwFrgIncLista);
         initDataBase();
 
-        return  view;
+        ItemClickSupport.addTo(_recyclerIncidentes).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+            }
+        });
+
+        return view;
     }
 
-    private void initDataBase(){
+    private void initDataBase() {
         dbUtil = new DataBaseUtil();
         dbUtil.obtieneIncidentes(this, "");
         dbUtil.obtieneTiposMotivos(this);
