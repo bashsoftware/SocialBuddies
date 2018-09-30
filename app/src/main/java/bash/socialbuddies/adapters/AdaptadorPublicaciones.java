@@ -57,15 +57,15 @@ public class AdaptadorPublicaciones extends RecyclerView.Adapter<AdaptadorPublic
         holder.viewPagerImagenes.setAdapter(viewPagerAdapter);
         holder.frameLayout.setVisibility(View.GONE);
 
-        if (beanPublicacion.getBeanUsuario() != null)
-            Glide.with(context).load(beanPublicacion.getBeanUsuario().getUsu_perfil()).apply(RequestOptions.circleCropTransform()).into(holder.imageViewFotoPerfil);
-
+        Glide.with(context).load(beanPublicacion.getBeanUsuario().getUsu_perfil()).apply(RequestOptions.circleCropTransform()).into(holder.imageViewFotoPerfil);
         holder.textViewNombre.setText(beanPublicacion.getBeanUsuario().getUsu_nombre());
         holder.textViewDescripcion.setText(beanPublicacion.getPub_descripcion() != null ? beanPublicacion.getPub_descripcion() : "");
         holder.textViewFecha.setText(beanPublicacion.getPub_fecha() != null ? new Date(beanPublicacion.getPub_fecha()).toString() : "");
         holder.buttonlike.setImageResource(beanPublicacion.getMeGusta() != null && beanPublicacion.getMeGusta() ? R.drawable.ic_like : R.drawable.ic_like_border);
         holder.textViewNumLikes.setText(beanPublicacion.getNumLikes() != null && beanPublicacion.getNumLikes() > 0 ? beanPublicacion.getNumLikes() + " Me gusta" : "");
         holder.textViewNumComentarios.setText((beanPublicacion.getNumComentarios() != null && beanPublicacion.getNumComentarios() > 0) ? (beanPublicacion.getNumComentarios() + (beanPublicacion.getNumComentarios() == 1 ? " Comentario" : " Comentarios")) : "");
+
+        holder.textViewDescripcion.setVisibility(holder.textViewDescripcion.getText().toString().equals("") ? View.GONE : View.VISIBLE);
 
         holder.textViewNumComentarios.setOnClickListener(new View.OnClickListener() {
             @Override

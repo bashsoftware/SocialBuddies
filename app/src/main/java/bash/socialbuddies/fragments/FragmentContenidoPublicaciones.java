@@ -84,6 +84,7 @@ public class FragmentContenidoPublicaciones extends Fragment {
         reference.orderByChild("pub_fecha").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                list.clear();
                 if (id != null) {
                     for (final DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         for (final DataSnapshot snapshot1 : snapshot.getChildren()) {

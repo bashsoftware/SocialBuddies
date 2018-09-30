@@ -16,6 +16,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +56,7 @@ public class AdaptadorComentarios extends RecyclerView.Adapter<AdaptadorComentar
             holder.textview_nombre.setText(beanUsuario.getUsu_nombre() != null ? beanUsuario.getUsu_nombre() : "");
             holder.textview_contenido.setText(beanComentario.getCom_contenido() != null ? beanComentario.getCom_contenido() : "");
             holder.textview_fecha.setText(beanComentario.getCom_fecha() != null ? beanComentario.getCom_fecha().toString() : "");
-            holder.textview_numMeGusta.setText(beanComentario.getNumMeGusta() != null && beanComentario.getNumMeGusta() > 0 ? beanComentario.getNumMeGusta() + " Me Gusta" : "");
+            holder.textview_numMeGusta.setText(beanComentario.getNumMeGusta() != null && beanComentario.getNumMeGusta() > 0 ? beanComentario.getNumMeGusta() + "" : "");
             holder.button_meGusta.setImageResource(beanComentario.getMeGusta() != null && beanComentario.getMeGusta() ? R.drawable.ic_like : R.drawable.ic_like_border);
             holder.button_meGusta.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -71,6 +72,10 @@ public class AdaptadorComentarios extends RecyclerView.Adapter<AdaptadorComentar
                     notifyDataSetChanged();
                 }
             });
+
+            String s = DateFormat.getDateTimeInstance().format(beanComentario.getCom_fecha());
+            holder.textview_fecha.setText(s);
+
         } else {
             list.remove(position);
             notifyDataSetChanged();

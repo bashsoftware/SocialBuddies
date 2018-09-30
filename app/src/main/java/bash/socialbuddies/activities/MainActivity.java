@@ -111,13 +111,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.main_activity_menu_drawer_publicaciones:
                 fragment = new FragmentContenidoPublicaciones();
+                getSupportActionBar().setTitle("Publicaciones");
                 break;
 
             case R.id.main_activity_menu_drawer_lista:
+                getSupportActionBar().setTitle("Inicio");
                 fragment = new FragmentVacio();
                 break;
 
             case R.id.main_activity_menu_drawer_config:
+                getSupportActionBar().setTitle("Configuración");
                 fragment = new FragmentVacio();
                 break;
 
