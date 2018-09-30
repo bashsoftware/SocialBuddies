@@ -31,8 +31,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import bash.socialbuddies.R;
+import bash.socialbuddies.beans.BeanIncidente;
 import bash.socialbuddies.beans.BeanUbicacion;
-import bash.socialbuddies.beans.beanIncidente;
 import bash.socialbuddies.fragments.FragmentNuevoRegistroProblema;
 import bash.socialbuddies.utilities.FirebaseReference;
 
@@ -40,7 +40,7 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
 
     private FrameLayout frame;
     private GoogleMap mMap;
-    private ArrayList<beanIncidente> incidentes;
+    private ArrayList<BeanIncidente> incidentes;
     DatabaseReference reference;
     private ArrayList<MarkerOptions> rangos;
     private FloatingActionButton button;
@@ -133,9 +133,9 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()) {
 
                     try{
-                        beanIncidente incidente = snapshot.getValue(beanIncidente.class);
-                    incidente.setInc_id(snapshot.getKey());
-                    incidentes.add(incidente);
+                        //beanIncidente incidente = snapshot.getValue(BeanIncidente.class);
+                    //incidente.setInc_id(snapshot.getKey());
+                    //incidentes.add(incidente);
                 }catch (Exception ex){
                         System.out.print(ex);
                 }
@@ -194,9 +194,9 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
     }
     void setMarkers(){
         lineas = new PolylineOptions();
-        for (beanIncidente incidente : incidentes)
-            mMap.addMarker(new MarkerOptions().position(new LatLng(incidente.getUbicacion().getLat(),incidente.getUbicacion().getLng())).title(incidente.getMotivo().getTipo()).snippet(incidente.getMotivo().getTitulo()));
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+        for (BeanIncidente incidente : incidentes)
+            //mMap.addMarker(new MarkerOptions().position(new LatLng(incidente.getUbicacion().getLat(),incidente.getUbicacion().getLng())).title(incidente.getMotivo().getTipo()).snippet(incidente.getMotivo().getTitulo()));
+       /* mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
                 Toast.makeText(getApplicationContext(), "toast" + marker.getPosition(), Toast.LENGTH_SHORT).show();
@@ -215,6 +215,6 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        mMap.setMyLocationEnabled(true);
+        mMap.setMyLocationEnabled(true);*/
     }
 }
