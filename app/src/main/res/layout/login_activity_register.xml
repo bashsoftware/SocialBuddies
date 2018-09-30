@@ -13,7 +13,9 @@
             android:hint="Email"
             android:layout_margin="10dp"
             android:padding="10dp"
-            android:textAlignment="center"/>
+            android:textAlignment="center"
+            android:inputType="textEmailAddress"
+            />
 
         <EditText
             android:layout_below="@id/edtEmailRegister"
@@ -34,7 +36,7 @@
             android:hint="Nombre"
             android:layout_margin="10dp"
             android:padding="10dp"
-            android:textAlignment="center"/>
+            android:textAlignment="center" />
 
         <EditText
             android:layout_below="@id/edtNombreRegister"

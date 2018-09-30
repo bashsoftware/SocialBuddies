@@ -13,6 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -43,6 +45,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+
+
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -112,13 +116,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.main_activity_menu_drawer_publicaciones:
                 fragment = new FragmentContenidoPublicaciones();
+                getSupportActionBar().setTitle("Publicaciones");
                 break;
 
             case R.id.main_activity_menu_drawer_lista:
+                getSupportActionBar().setTitle("Inicio");
                 fragment = new FragmentVacio();
                 break;
 
             case R.id.main_activity_menu_drawer_config:
+                getSupportActionBar().setTitle("Configuración");
                 fragment = new FragmentVacio();
                 break;
 
