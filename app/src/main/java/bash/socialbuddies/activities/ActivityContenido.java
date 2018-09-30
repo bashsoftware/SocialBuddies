@@ -10,7 +10,7 @@ import android.widget.FrameLayout;
 
 import bash.socialbuddies.R;
 import bash.socialbuddies.fragments.FragmentContenidoComentario;
-import bash.socialbuddies.fragments.FragmentNuevoRegistroPublicacion;
+import bash.socialbuddies.fragments.FragmentContenidoPublicacionRegistro;
 
 public class ActivityContenido extends AppCompatActivity {
 
@@ -37,7 +37,7 @@ public class ActivityContenido extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+
             }
         });
 
@@ -54,7 +54,7 @@ public class ActivityContenido extends AppCompatActivity {
                 getSupportActionBar().setTitle("Comentarios");
                 break;
             case PUBLICACION_REGISTRO:
-                fragment = new FragmentNuevoRegistroPublicacion();
+                fragment = new FragmentContenidoPublicacionRegistro();
                 getSupportActionBar().setTitle("Nueva Publicación");
                 break;
             default:

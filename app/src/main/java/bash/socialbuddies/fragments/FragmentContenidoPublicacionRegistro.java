@@ -46,7 +46,7 @@ import bash.socialbuddies.utilities.Singleton;
 
 import static android.app.Activity.RESULT_OK;
 
-public class FragmentNuevoRegistroPublicacion extends Fragment {
+public class FragmentContenidoPublicacionRegistro extends Fragment {
 
     private View view;
     private ImageView imageView;
