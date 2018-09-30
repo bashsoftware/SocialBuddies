@@ -60,7 +60,68 @@ public class ActivityMapa extends FragmentActivity implements OnMapReadyCallback
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
             mMap.addMarker(new MarkerOptions().position(latLng));
 
+                MarkerOptions  markerOptions = new MarkerOptions();
+                markerOptions.snippet("descripcion");
+                markerOptions.title("Toca Para Borrar");
+                markerOptions.position(latLng);
+                mMap.addMarker(markerOptions);
+                areaMarcadores();
+                FragmentNuevoRegistroProblema.latLng = new BeanUbicacion(latLng.latitude,latLng.longitude);
+                if (FragmentNuevoRegistroProblema.latLng != null) {
 
+                    //finalize();
+                    double lat = 0, lng = 0;
+                    int i = 0;
+
+                    for (BeanUbicacion ub:puntos) {
+                        i++;
+                        markerOptions.position(new LatLng(ub.getLat(),ub.getLng()));
+
+                        MarkerOptions marke = markerOptions;
+                        lat += marke.getPosition().latitude;
+                        lng += marke.getPosition().longitude;
+
+                    }
+                    lat = lat / i;
+                    lng = lng / i;
+
+                    int j = 0;
+                    float[] f, f1;
+                    LatLng mayor = new LatLng(lat, lng);
+                    ArrayList<Float> mayores = new ArrayList<>();
+                    for (BeanUbicacion ubc :puntos) {
+                        f = new float[1];
+                        f1 = new float[1];
+                        Location.distanceBetween(lat, lng, ubc.getLat(),ubc.getLng(), f);
+                        Location.distanceBetween(lat, lng, mayor.latitude, mayor.longitude, f1);
+                        if (f[0] > f1[0]) {
+                            mayor = new LatLng(ubc.getLat(),ubc.getLng());
+
+                        }
+                    }
+
+                    CircleOptions circleOptions = new CircleOptions();
+                    circleOptions.strokeColor(R.color.colorPrimary);
+                    circleOptions.strokeWidth(3f);
+                    circleOptions.radius(measure(lat, lng, mayor.latitude, mayor.longitude));
+                    circleOptions.center(new LatLng(lat, lng));
+                    circleOptions.fillColor(Color.argb(70, 3, 169, 244));
+                    dibujarLineas(circleOptions, new LatLng(lat, lng));
+                    FragmentNuevoRegistroProblema.latLng = new BeanUbicacion(lat,lng);
+                    ArrayList<BeanUbicacion> puntos = new ArrayList<>();
+                    for(BeanUbicacion ub : puntos){
+                        puntos.add(new BeanUbicacion(ub.getLat(),ub.getLng()));
+                    }
+                    FragmentNuevoRegistroProblema.puntos = puntos;
+                    try {
+                        this.finalize();
+                    } catch (Throwable throwable) {
+                        throwable.printStackTrace();
+                    }
+
+                } else {
+                    Toast.makeText(getApplicationContext(), "Seleccione Un Logar", Toast.LENGTH_SHORT).show();
+                }
             }
 
 
@@ -82,13 +143,14 @@ public class ActivityMapa extends FragmentActivity implements OnMapReadyCallback
         mMap.clear();
 
         PolylineOptions poly = new PolylineOptions();
-        for (MarkerOptions m : rangos) {
-            mMap.addMarker(m);
-            poly.add(m.getPosition());
+        for (BeanUbicacion b : puntos)
+        {
+
+            poly.add(new LatLng(b.getLat(),b.getLng()));
         }
         poly.color(Color.rgb(3, 169, 244));
-        if(rangos.size()>0)
-            poly.add(rangos.get(0).getPosition());
+        if(puntos.size()>0)
+            poly.add(new LatLng(puntos.get(0).getLat(),puntos.get(0).getLng()));
 
 
         mMap.addPolyline(poly);
@@ -97,13 +159,13 @@ public class ActivityMapa extends FragmentActivity implements OnMapReadyCallback
     void dibujarLineas(CircleOptions circle,LatLng latLng) {
 
         PolylineOptions poly = new PolylineOptions();
-        for (MarkerOptions m : rangos) {
-            poly.add(m.getPosition());
+        for (BeanUbicacion u : puntos) {
+            poly.add(new LatLng(u.getLat(),u.getLng()));
         }
         poly.color(Color.rgb(3, 169, 244));
-        poly.add(rangos.get(0).getPosition());
-        poly.add(rangos.get(0).getPosition());
+        poly.add(new LatLng(puntos.get(0).getLat(),puntos.get(0).getLng()));
         mMap.addCircle(circle);
+
         mMap.addMarker(new MarkerOptions().position(latLng).icon(BitmapDescriptorFactory.fromResource(R.drawable.a)));
         mMap.addPolyline(poly);
 
