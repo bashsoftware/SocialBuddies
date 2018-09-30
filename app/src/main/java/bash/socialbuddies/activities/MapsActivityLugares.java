@@ -121,12 +121,12 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(25.544846, -103.406460), 13));
+        incidentes = new ArrayList<>();
 
         reference = FirebaseDatabase.getInstance().getReference(FirebaseReference.INCIDENTES);
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.child("Choques").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                incidentes = new ArrayList<>();
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()) {
 
                     try{
@@ -136,6 +136,50 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
                 }catch (Exception ex){
                         System.out.print(ex);
                 }
+                }
+                setMarkers();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        reference.child("Inundacion").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot:dataSnapshot.getChildren()) {
+
+                    try{
+                        BeanIncidente incidente = snapshot.getValue(BeanIncidente.class);
+                        incidente.setInc_id(snapshot.getKey());
+                        incidentes.add(incidente);
+                    }catch (Exception ex){
+                        System.out.print(ex);
+                    }
+                }
+                setMarkers();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        reference.child("Socavon").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot:dataSnapshot.getChildren()) {
+
+                    try{
+                        BeanIncidente incidente = snapshot.getValue(BeanIncidente.class);
+                        incidente.setInc_id(snapshot.getKey());
+                        incidentes.add(incidente);
+                    }catch (Exception ex){
+                        System.out.print(ex);
+                    }
                 }
                 setMarkers();
 
