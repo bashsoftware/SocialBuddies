@@ -1,17 +1,12 @@
 package bash.socialbuddies.activities;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,23 +16,16 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import bash.socialbuddies.R;
-import bash.socialbuddies.activities.MainActivity;
 import bash.socialbuddies.beans.BeanUsuario;
 import bash.socialbuddies.fragments.FragmentLogin;
 import bash.socialbuddies.fragments.FragmentRegister;
 import bash.socialbuddies.utilities.FirebaseReference;
-import bash.socialbuddies.utilities.Singleton;
 
 public class LoginActivity extends AppCompatActivity {
 
     private FrameLayout frmContainer;
-    private FirebaseAuth auth;
     private DatabaseReference database;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,22 +33,34 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         initControls();
         displayScreen(R.layout.login_activity_login);
+
+        FirebaseAuth.getInstance().signOut();
+        FirebaseAuth.getInstance().addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if (firebaseAuth.getCurrentUser() != null) {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        });
+
+        //FirebaseAuth.getInstance().signOut();
     }
 
-    private void initControls(){
-        auth = FirebaseAuth.getInstance();
+    private void initControls() {
         database = FirebaseDatabase.getInstance().getReference();
         frmContainer = findViewById(R.id.container_login);
     }
 
-
-
-    public void displayScreen(int id){
+    public void displayScreen(int id) {
         Fragment fragment = null;
-        switch (id){
+        switch (id) {
             case R.layout.login_activity_login:
-               fragment = new FragmentLogin();
-               break;
+                fragment = new FragmentLogin();
+                break;
             case R.layout.login_activity_register:
                 fragment = new FragmentRegister();
                 break;
@@ -70,42 +70,48 @@ public class LoginActivity extends AppCompatActivity {
         ft.commit();
     }
 
-    public void login(String email, String password){
-        auth.signInWithEmailAndPassword(email, password)
+    public void login(String email, String password) {
+
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
-                        }else{
-                            Toast.makeText(getApplicationContext(),"Error al iniciar sesión", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Error al iniciar sesión", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
 
     }
 
-    public void register(final BeanUsuario usuario, String password){
-        auth.createUserWithEmailAndPassword(usuario.getUsu_correo(), password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            usuario.setUsu_id(task.getResult().getUser().getUid());
-                            Singleton.getInstancia().setBeanUsuario(usuario);
+    public void register(final BeanUsuario usuario, String password) {
 
-                            Map<String, Object> childUpdates = new HashMap<>();
-                            childUpdates.put("/" + FirebaseReference.USUARIO  + "/" + task, usuario.toMap());
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(usuario.getUsu_correo(), password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
 
-                            database.updateChildren(childUpdates);
-                            displayScreen(R.layout.login_activity_login);
-                        }else{
-                            //Log.d("dfd", );
-                            Toast.makeText(getApplicationContext(),"Error al iniciar sesión " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                if (task.isSuccessful()) {
+
+                    usuario.setUsu_id(task.getResult().getUser().getUid());
+
+                    database.child(FirebaseReference.USUARIOS).child(usuario.getUsu_id()).setValue(usuario).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(getApplicationContext(), "USUARIOS registrado con éxito", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
+                    });
+
+                } else {
+                    Toast.makeText(getApplicationContext(), "Error al iniciar sesión " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
     }
+
 }

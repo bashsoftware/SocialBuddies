@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "738533965950",
-    "firebase_url": "https://social-buddies-6d82c.firebaseio.com",
-    "project_id": "social-buddies-6d82c",
-    "storage_bucket": "social-buddies-6d82c.appspot.com"
+    "project_number": "724350532872",
+    "firebase_url": "https://socialbuddies-1ab8d.firebaseio.com",
+    "project_id": "socialbuddies-1ab8d",
+    "storage_bucket": "socialbuddies-1ab8d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:738533965950:android:a4120654c89621e6",
+        "mobilesdk_app_id": "1:724350532872:android:a4120654c89621e6",
         "android_client_info": {
           "package_name": "bash.socialbuddies"
         }
       },
       "oauth_client": [
         {
-          "client_id": "738533965950-ctifm4hi0845o790kk396r6g35srcv05.apps.googleusercontent.com",
+          "client_id": "724350532872-1hlgv22573b6fmt9cs59s232opkfv69m.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "bash.socialbuddies",
@@ -23,13 +23,13 @@
           }
         },
         {
-          "client_id": "738533965950-tlqq1o1djt6g6o1anfkom4ebgd5k2ocl.apps.googleusercontent.com",
+          "client_id": "724350532872-tnpplkv9nmshqqrk79cutdhhhr74rtgr.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyARJBKJ1GnYuWl4nsZPrQ3bz1VIeYmOzbw"
+          "current_key": "AIzaSyDqoTKliAxI1MhVKDImVbIdksUVS5cuhsg"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "738533965950-tlqq1o1djt6g6o1anfkom4ebgd5k2ocl.apps.googleusercontent.com",
+              "client_id": "724350532872-tnpplkv9nmshqqrk79cutdhhhr74rtgr.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

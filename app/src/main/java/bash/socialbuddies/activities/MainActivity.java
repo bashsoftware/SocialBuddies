@@ -13,9 +13,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import bash.socialbuddies.R;
+import bash.socialbuddies.beans.BeanUsuario;
 import bash.socialbuddies.fragments.FragmentContenidoPublicaciones;
 import bash.socialbuddies.fragments.FragmentVacio;
+import bash.socialbuddies.utilities.FirebaseReference;
+import bash.socialbuddies.utilities.Singleton;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -37,11 +48,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         frameLayout = (FrameLayout) findViewById(R.id.containt_main_framelayout);
 
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            logout();
+            return;
+        }
+
         setSupportActionBar(toolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(FirebaseReference.USUARIOS);
+        reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                BeanUsuario beanUsuario = dataSnapshot.getValue(BeanUsuario.class);
+                Singleton.getInstancia().setBeanUsuario(beanUsuario);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void logout() {
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     @Override
@@ -84,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.main_activity_menu_drawer__cerrar:
-                fragment = new FragmentVacio();
+                logout();
                 break;
 
         }
