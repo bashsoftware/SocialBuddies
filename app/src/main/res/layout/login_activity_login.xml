@@ -1,51 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.LoginActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/fondologin">
 
-    <EditText
-        android:id="@+id/edtEmail"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:hint="@string/activity_login_edittext_email"
-        android:textAlignment="center"
-        android:inputType="textEmailAddress"/>
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/fondologin"
+            android:scaleType = "centerCrop"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#77000000"/>
+    </FrameLayout>
 
-    <EditText
-        android:id="@+id/edtPass"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:hint="@string/activity_login_edittext_contrasena"
-        android:textAlignment="center"
-        android:inputType="textPassword"/>
+        android:layout_height="match_parent"
+        android:weightSum="1">
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="@string/activity_login_button_inicia"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:src="@drawable/logo"
+            android:padding="15dp"
+            />
 
-    <TextView
-        android:id="@+id/txvRegistro"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/activity_login_textview_registro"
-        android:padding="10dp"
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:orientation="vertical">
 
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/login_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_margin="10dp"/>
+            <EditText
+                android:id="@+id/edtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:hint="@string/activity_login_edittext_email"
+                android:textAlignment="center"
+                android:inputType="textEmailAddress"
+                android:padding="13dp"
+                android:background="@drawable/radius"
+                android:textColor="@color/textIcons"
+                android:textColorHint="@color/textIcons"/>
+
+            <EditText
+                android:id="@+id/edtPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:hint="@string/activity_login_edittext_contrasena"
+                android:textAlignment="center"
+                android:inputType="textPassword"
+                android:padding="13dp"
+                android:background="@drawable/radius"
+                android:textColor="@color/textIcons"
+                android:textColorHint="@color/textIcons"/>
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:padding="13dp"
+                android:text="@string/activity_login_button_inicia"
+                android:background="@drawable/radius_button"/>
+
+            <TextView
+                android:id="@+id/txvRegistro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_login_textview_registro"
+                android:padding="10dp"
+                android:textColor="@color/textIcons"
+                />
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/login_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"/>
+
+        </LinearLayout>
 
 
-</LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

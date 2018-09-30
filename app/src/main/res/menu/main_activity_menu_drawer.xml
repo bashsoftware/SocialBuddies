@@ -19,6 +19,10 @@
             android:id="@+id/main_activity_menu_drawer_publicaciones"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Publicaciones" />
+        <item
+            android:id="@+id/main_activity_menu_drawer_nuevo"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Nuevo Incidente" />
 
     </group>
 
