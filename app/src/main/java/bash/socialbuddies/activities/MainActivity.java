@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (itemId) {
             case R.id.main_activity_menu_drawer_mapa:
-                //intent = new Intent(getApplicationContext(), MapsActivity.class);
+                intent = new Intent(getApplicationContext(), MapsActivityLugares.class);
                 break;
 
             case R.id.main_activity_menu_drawer_publicaciones:
