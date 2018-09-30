@@ -37,6 +37,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private int fragmentActual = 0;
 
+    private Fragment fragment = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void displayScreen(int id) {
-        Fragment fragment = null;
+        fragment = null;
         fragmentActual = id;
         switch (id) {
             case R.layout.login_activity_login:
@@ -185,4 +187,10 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        ((FragmentLogin)fragment).onActivityResult(requestCode,resultCode,data);
+
+    }
 }
