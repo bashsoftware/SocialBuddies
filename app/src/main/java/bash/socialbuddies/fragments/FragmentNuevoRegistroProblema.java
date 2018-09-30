@@ -132,16 +132,19 @@ public class FragmentNuevoRegistroProblema extends Fragment {
         beanIncidente.setInc_fecha(System.currentTimeMillis());
         beanIncidente.setInc_descripcion(descripcion.getText().toString());
         beanIncidente.setInc_imgs(urls);
+        beanIncidente.setUbicacion(latLng);
+        beanIncidente.setPuntos(puntos);
 
         BeanMotivo motivo = new BeanMotivo();
         motivo.setMot_tipo(selected);
         motivo.setMot_titulo(titulo.getText().toString());
+        beanIncidente.setMotivo(motivo);
 
         db.child(FirebaseReference.INCIDENTES).child(motivo.getMot_tipo()).push().setValue(beanIncidente).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    getActivity().finish();
+
                 }
             }
         });
