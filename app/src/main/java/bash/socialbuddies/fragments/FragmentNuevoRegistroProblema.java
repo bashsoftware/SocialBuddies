@@ -20,7 +20,6 @@ import bash.socialbuddies.activities.MapsActivityRegistro;
 import bash.socialbuddies.beans.BeanMotivo;
 import bash.socialbuddies.beans.BeanUbicacion;
 import bash.socialbuddies.beans.BeanUsuario;
-import bash.socialbuddies.beans.beanIncidente;
 import bash.socialbuddies.utilities.FirebaseReference;
 import bash.socialbuddies.utilities.Singleton;
 
