@@ -23,9 +23,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import bash.socialbuddies.R;
 import bash.socialbuddies.beans.BeanUsuario;
+import bash.socialbuddies.fragments.FragmentBusqueda;
 import bash.socialbuddies.fragments.FragmentContenidoPublicaciones;
 import bash.socialbuddies.fragments.FragmentNuevoRegistroProblema;
-import bash.socialbuddies.fragments.FragmentVacio;
 import bash.socialbuddies.utilities.FirebaseReference;
 import bash.socialbuddies.utilities.Singleton;
 
@@ -75,6 +75,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             }
         });
+
+        displaySelectedScreen(R.id.main_activity_menu_drawer_publicaciones);
     }
 
     private void logout() {
@@ -118,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.main_activity_menu_drawer_lista:
                 getSupportActionBar().setTitle("Inicio");
-                fragment = new FragmentVacio();
+                fragment = new FragmentBusqueda();
                 break;
 
             case R.id.main_activity_menu_drawer_nuevo:
