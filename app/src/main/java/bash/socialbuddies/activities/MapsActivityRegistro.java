@@ -210,6 +210,7 @@ public class MapsActivityRegistro extends FragmentActivity implements OnMapReady
             poly.add(m.getPosition());
         }
         poly.color(Color.rgb(3, 169, 244));
+     if(rangos.size()>0)
         poly.add(rangos.get(0).getPosition());
 
 
