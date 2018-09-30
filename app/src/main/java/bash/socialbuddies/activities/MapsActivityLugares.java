@@ -75,6 +75,7 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
                     }
                     lat = lat / i;
                     lng = lng / i;
+
                     mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_water)).title("final").snippet("snippet final"));
 
                     int j = 0;
@@ -188,6 +189,7 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
         poly.color(Color.rgb(3, 169, 244));
         poly.add(rangos.get(0).getPosition());
         mMap.addCircle(circle);
+
         mMap.addMarker(new MarkerOptions().position(latLng).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_water)));
         mMap.addPolyline(poly);
 
@@ -195,7 +197,6 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
     void setMarkers(){
         lineas = new PolylineOptions();
         for (BeanIncidente incidente : incidentes)
-            mMap.addMarker(new MarkerOptions().position(new LatLng(incidente.getUbicacion().getLat(),incidente.getUbicacion().getLng())).title(incidente.getMotivo().getTipo()).snippet(incidente.getMotivo().getTitulo()));
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
@@ -204,6 +205,93 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
                 return false;
             }
         });
+
+
+ArrayList<ArrayList<LatLng>> circulos = new ArrayList<>();
+        for(BeanIncidente incidente:incidentes){
+
+            PolylineOptions poly = new PolylineOptions();
+            ArrayList<LatLng> ll = new ArrayList<>();
+            for(int i =0;i<incidente.getPuntos().size();i++){
+                if(incidente.getMotivo().getTitulo().toString().toLowerCase().equals("inundacion")) {
+                    poly.color(Color.rgb(3, 169, 244));
+                }else if(incidente.getMotivo().getTitulo().toString().toLowerCase().equals("socavon")) {
+                    poly.color(Color.rgb(201, 147, 94));
+                }else{
+                    poly.color(Color.rgb(234, 246, 72));
+                }
+
+                poly.add(new LatLng(incidente.getPuntos().get(i).getLat(),incidente.getPuntos().get(i).getLng()));
+
+                ll.add(new LatLng(incidente.getPuntos().get(i).getLat(),incidente.getPuntos().get(i).getLng()));
+            }
+            circulos.add(ll);
+
+            poly.add(new LatLng(incidente.getPuntos().get(0).getLat(),incidente.getPuntos().get(0).getLng()));
+
+
+            for(LatLng l:ll){
+                //finalize();
+                double lat = 0, lng = 0;
+                int i = 0;
+
+                for (LatLng inc: ll ){
+                    i++;
+                    lat += inc.latitude;
+                    lng += inc.longitude;
+
+                }
+                lat = lat / i;
+                lng = lng / i;
+                if(incidente.getMotivo().getTitulo().toString().toLowerCase().equals("inundacion")) {
+                    mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_water)).title(incidente.getInc_titulo()).snippet(incidente.getInc_descripcion()));
+                }else if(incidente.getMotivo().getTitulo().toString().toLowerCase().equals("socavon")) {
+                    mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_comment)).title(incidente.getInc_titulo()).snippet(incidente.getInc_descripcion()));
+                }else{
+                    mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).title(incidente.getInc_titulo()).snippet(incidente.getInc_descripcion()));
+
+                }
+                int j = 0;
+                float[] f, f1;
+                LatLng mayor = new LatLng(lat, lng);
+                ArrayList<Float> mayores = new ArrayList<>();
+                for (LatLng in:ll) {
+                    f = new float[1];
+                    f1 = new float[1];
+                    Location.distanceBetween(lat, lng, in.latitude, in.longitude, f);
+                    Location.distanceBetween(lat, lng, mayor.latitude, mayor.longitude, f1);
+                    if (f[0] > f1[0]) {
+                        mayor = new LatLng(in.latitude, in.longitude);
+
+                    }
+                }
+
+                CircleOptions circleOptions = new CircleOptions();
+                circleOptions.strokeColor(R.color.colorPrimary);
+                circleOptions.strokeWidth(3f);
+                circleOptions.radius(measure(lat, lng, mayor.latitude, mayor.longitude));
+                circleOptions.center(new LatLng(lat, lng));
+                if(incidente.getMotivo().getTitulo().toString().toLowerCase().equals("inundacion")) {
+                    circleOptions.fillColor(Color.argb(70, 3, 169, 244));
+                }else if(incidente.getMotivo().getTitulo().toString().toLowerCase().equals("socavon")) {
+                    circleOptions.fillColor(Color.argb(70, 201, 147, 94));
+                }else{
+                    circleOptions.fillColor(Color.argb(70, 234, 246, 72));
+                }
+
+                mMap.addPolyline(poly);
+                mMap.addCircle(circleOptions);
+
+
+
+            }
+
+
+
+
+        }
+
+
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
