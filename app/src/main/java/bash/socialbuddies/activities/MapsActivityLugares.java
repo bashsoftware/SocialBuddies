@@ -31,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import bash.socialbuddies.R;
+import bash.socialbuddies.beans.BeanIncidente;
 import bash.socialbuddies.beans.BeanUbicacion;
 import bash.socialbuddies.fragments.FragmentNuevoRegistroProblema;
 import bash.socialbuddies.utilities.FirebaseReference;
