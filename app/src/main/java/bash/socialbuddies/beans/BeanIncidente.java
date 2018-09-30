@@ -9,7 +9,7 @@ public class BeanIncidente implements Serializable {
     private String inc_descripcion;
     private Long inc_fecha;
     private BeanMotivo motivo;
-    private BeanUsuario usuario;
+    private BeanUsuario beanUsuario;
     private ArrayList<String> inc_imgs;
     private BeanUbicacion ubicacion;
     private ArrayList<BeanUbicacion> puntos;
@@ -46,12 +46,12 @@ public class BeanIncidente implements Serializable {
         this.motivo = motivo;
     }
 
-    public BeanUsuario getUsuario() {
-        return usuario;
+    public BeanUsuario getBeanUsuario() {
+        return beanUsuario;
     }
 
-    public void setUsuario(BeanUsuario usuario) {
-        this.usuario = usuario;
+    public void setBeanUsuario(BeanUsuario beanUsuario) {
+        this.beanUsuario = beanUsuario;
     }
 
     public Long getInc_fecha() {

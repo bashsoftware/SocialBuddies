@@ -85,8 +85,8 @@ public class FragmentContenidoIncidente extends Fragment {
         viewPagerImagenes.setAdapter(viewPagerAdapter);
         frameLayout.setVisibility(View.GONE);
 
-        Glide.with(getContext()).load(beanIncidente.getUsuario().getUsu_perfil()).apply(RequestOptions.circleCropTransform()).into(imageViewFotoPerfil);
-        textViewNombre.setText(beanIncidente.getUsuario().getUsu_nombre());
+        Glide.with(getContext()).load(beanIncidente.getBeanUsuario().getUsu_perfil()).apply(RequestOptions.circleCropTransform()).into(imageViewFotoPerfil);
+        textViewNombre.setText(beanIncidente.getBeanUsuario().getUsu_nombre());
         textViewDescripcion.setText(beanIncidente.getInc_descripcion() != null ? beanIncidente.getInc_descripcion() : "");
         textViewFecha.setText(beanIncidente.getInc_fecha() != null ? new Date(beanIncidente.getInc_fecha()).toString() : "");
         buttonlike.setImageResource(beanIncidente.getMeGusta() != null && beanIncidente.getMeGusta() ? R.drawable.ic_like : R.drawable.ic_like_border);

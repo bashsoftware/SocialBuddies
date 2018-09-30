@@ -89,12 +89,12 @@ public class FragmentNuevoRegistroProblema extends Fragment {
             motivo.setMot_tipo(spinner.getSelectedItem().toString());
             motivo.setMot_titulo(titulo.getText().toString());
 
-            BeanIncidente incidente = new BeanIncidente();
+           /* BeanIncidente incidente = new BeanIncidente();
             incidente.setInc_titulo(titulo.getText().toString());
             incidente.setInc_descripcion(descripcion.getText().toString());
             incidente.setInc_imgs(imgs);
             incidente.setUbicacion(latLng);
-            incidente.setUsuario(usuario);
+            incidente.getBeanUsuario(usuario);
             incidente.setMotivo(motivo);
             incidente.setPuntos(puntos);
 
@@ -102,7 +102,7 @@ public class FragmentNuevoRegistroProblema extends Fragment {
             incidente.setInc_fecha(currentTime.getTime());
             db.child(FirebaseReference.INCIDENTES).child(incidente.getMotivo().getMot_tipo()).push().setValue(incidente);
 
-            latLng = null;
+            latLng = null;*/
 
         }
     }
