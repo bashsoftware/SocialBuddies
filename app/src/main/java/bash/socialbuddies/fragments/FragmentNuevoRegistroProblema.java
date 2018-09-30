@@ -71,8 +71,8 @@ public class FragmentNuevoRegistroProblema extends Fragment {
 
 
             BeanMotivo motivo = new BeanMotivo();
-            motivo.setTipo(descripcion.getText().toString());
-            motivo.setTitulo(titulo.getText().toString());
+            motivo.setMot_tipo(descripcion.getText().toString());
+            motivo.setMot_titulo(titulo.getText().toString());
 
             BeanIncidente incidente = new BeanIncidente();
             incidente.setInc_titulo(titulo.getText().toString());

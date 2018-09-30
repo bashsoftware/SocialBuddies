@@ -76,7 +76,7 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
                     lat = lat / i;
                     lng = lng / i;
 
-                    mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_water)).title("final").snippet("snippet final"));
+                    mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).icon(BitmapDescriptorFactory.fromResource(R.drawable.a)).title("final").snippet("snippet final"));
 
                     int j = 0;
                     float[] f, f1;
@@ -190,7 +190,7 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
         poly.add(rangos.get(0).getPosition());
         mMap.addCircle(circle);
 
-        mMap.addMarker(new MarkerOptions().position(latLng).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_water)));
+        mMap.addMarker(new MarkerOptions().position(latLng).icon(BitmapDescriptorFactory.fromResource(R.drawable.a)));
         mMap.addPolyline(poly);
 
     }
@@ -213,9 +213,9 @@ ArrayList<ArrayList<LatLng>> circulos = new ArrayList<>();
             PolylineOptions poly = new PolylineOptions();
             ArrayList<LatLng> ll = new ArrayList<>();
             for(int i =0;i<incidente.getPuntos().size();i++){
-                if(incidente.getMotivo().getTitulo().toString().toLowerCase().equals("inundacion")) {
+                if(incidente.getMotivo().getMot_titulo().toString().toLowerCase().equals("inundacion")) {
                     poly.color(Color.rgb(3, 169, 244));
-                }else if(incidente.getMotivo().getTitulo().toString().toLowerCase().equals("socavon")) {
+                }else if(incidente.getMotivo().getMot_titulo().toString().toLowerCase().equals("socavon")) {
                     poly.color(Color.rgb(201, 147, 94));
                 }else{
                     poly.color(Color.rgb(234, 246, 72));
@@ -243,9 +243,9 @@ ArrayList<ArrayList<LatLng>> circulos = new ArrayList<>();
                 }
                 lat = lat / i;
                 lng = lng / i;
-                if(incidente.getMotivo().getTitulo().toString().toLowerCase().equals("inundacion")) {
-                    mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_water)).title(incidente.getInc_titulo()).snippet(incidente.getInc_descripcion()));
-                }else if(incidente.getMotivo().getTitulo().toString().toLowerCase().equals("socavon")) {
+                if(incidente.getMotivo().getMot_titulo().toString().toLowerCase().equals("inundacion")) {
+                    mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).icon(BitmapDescriptorFactory.fromResource(R.drawable.a)).title(incidente.getInc_titulo()).snippet(incidente.getInc_descripcion()));
+                }else if(incidente.getMotivo().getMot_titulo().toString().toLowerCase().equals("socavon")) {
                     mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_comment)).title(incidente.getInc_titulo()).snippet(incidente.getInc_descripcion()));
                 }else{
                     mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).title(incidente.getInc_titulo()).snippet(incidente.getInc_descripcion()));
@@ -271,9 +271,9 @@ ArrayList<ArrayList<LatLng>> circulos = new ArrayList<>();
                 circleOptions.strokeWidth(3f);
                 circleOptions.radius(measure(lat, lng, mayor.latitude, mayor.longitude));
                 circleOptions.center(new LatLng(lat, lng));
-                if(incidente.getMotivo().getTitulo().toString().toLowerCase().equals("inundacion")) {
+                if(incidente.getMotivo().getMot_titulo().toString().toLowerCase().equals("inundacion")) {
                     circleOptions.fillColor(Color.argb(70, 3, 169, 244));
-                }else if(incidente.getMotivo().getTitulo().toString().toLowerCase().equals("socavon")) {
+                }else if(incidente.getMotivo().getMot_titulo().toString().toLowerCase().equals("socavon")) {
                     circleOptions.fillColor(Color.argb(70, 201, 147, 94));
                 }else{
                     circleOptions.fillColor(Color.argb(70, 234, 246, 72));
