@@ -2,56 +2,65 @@ package bash.socialbuddies.beans;
 
 import java.util.ArrayList;
 
-public class beanIncidente {
-    private String inc_id,inc_decripcion;
-    private ArrayList<String> inc_imgs;
-    private BeanUsuario usuario;
+public class BeanIncidente {
+    private String inc_titulo;
+    private String inc_descripcion;
+    private String inc_fecha;
     private BeanMotivo motivo;
-
+    private BeanUsuario usuario;
+    private ArrayList<String> inc_imgs;
     private BeanUbicacion ubicacion;
     private ArrayList<BeanUbicacion> puntos;
-    public beanIncidente() {
+    private String inc_id;
+
+    public String getInc_titulo() {
+        return inc_titulo;
     }
 
-    public String getInc_id() {
-        return inc_id;
+    public void setInc_titulo(String inc_titulo) {
+        this.inc_titulo = inc_titulo;
     }
 
-    public String getInc_decripcion() {
-        return inc_decripcion;
+    public String getInc_descripcion() {
+        return inc_descripcion;
     }
 
-    public ArrayList<String> getInc_imgs() {
-        return inc_imgs;
-    }
-
-    public BeanUsuario getUsuario() {
-        return usuario;
+    public void setInc_descripcion(String inc_descripcion) {
+        this.inc_descripcion = inc_descripcion;
     }
 
     public BeanMotivo getMotivo() {
         return motivo;
     }
 
-    public void setInc_id(String inc_id) {
-        this.inc_id = inc_id;
+    public void setMotivo(BeanMotivo motivo) {
+        this.motivo = motivo;
     }
 
-    public void setInc_decripcion(String inc_decripcion) {
-        this.inc_decripcion = inc_decripcion;
-    }
-
-    public void setInc_imgs(ArrayList<String> inc_imgs) {
-        this.inc_imgs = inc_imgs;
+    public BeanUsuario getUsuario() {
+        return usuario;
     }
 
     public void setUsuario(BeanUsuario usuario) {
         this.usuario = usuario;
     }
 
-    public void setMotivo(BeanMotivo motivo) {
-        this.motivo = motivo;
+    public String getInc_fecha() {
+        return inc_fecha;
     }
+
+    public void setInc_fecha(String inc_fecha) {
+        this.inc_fecha = inc_fecha;
+    }
+
+    public ArrayList<String> getInc_imgs() {
+        return inc_imgs;
+    }
+
+    public void setInc_imgs(ArrayList<String> inc_imgs) {
+        this.inc_imgs = inc_imgs;
+    }
+
     public BeanUbicacion getUbicacion() {
         return ubicacion;
     }
@@ -66,5 +75,13 @@ public class beanIncidente {
 
     public void setPuntos(ArrayList<BeanUbicacion> puntos) {
         this.puntos = puntos;
+    }
+
+    public String getInc_id() {
+        return inc_id;
+    }
+
+    public void setInc_id(String inc_id) {
+        this.inc_id = inc_id;
     }
 }
