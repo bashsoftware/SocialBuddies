@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/list_item_publicacion_imagenPerfil"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="4dp"
+            android:background="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/list_item_publicacion_textView_nombreProveedor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_margin="4dp"
+            android:layout_toLeftOf="@+id/list_item_publicacion_textView_fecha"
+            android:layout_toRightOf="@+id/list_item_publicacion_imagenPerfil"
+            android:fontFamily="@font/roboto"
+            android:gravity="center_vertical"
+            android:maxLines="2"
+            android:text="@string/medium_text"
+            android:textColor="@color/primaryText"
+            android:textSize="13dp" />
+
+        <TextView
+            android:id="@+id/list_item_publicacion_textView_fecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="4dp"
+            android:fontFamily="@font/roboto"
+            android:text="10/12/1995 21:10"
+            android:textColor="@color/secondaryText"
+            android:textSize="13dp" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/list_item_publicacion_textoPublicacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/primaryText" />
+
+    <FrameLayout
+        android:id="@+id/list_item_publicacion_frameLayout_imagenes"
+        android:layout_width="match_parent"
+        android:layout_height="368dp">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/list_item_publicacion_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/list_item_publicacion_numero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/transparent"
+            android:backgroundTint="@color/secondaryText"
+            android:paddingHorizontal="7dp"
+            android:paddingVertical="3dp"
+            android:text="1/5"
+            android:textAlignment="textEnd"
+            android:textColor="@color/primaryText"
+            android:textSize="13dp" />
+
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/list_item_publicacion_button_like"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@color/transparent"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_like_border"
+            android:tint="@color/colorAccent" />
+
+        <ImageButton
+            android:id="@+id/list_item_publicacion_button_comentar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/list_item_publicacion_button_like"
+            android:background="@color/transparent"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_comment"
+            android:tint="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/list_item_publicacion_textoNumLikes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="5dp"
+            android:layout_toRightOf="@+id/list_item_publicacion_button_comentar"
+            android:fontFamily="@font/roboto"
+            android:text="25 Likes"
+            android:textColor="@color/secondaryText"
+            android:textSize="13dp" />
+
+        <TextView
+            android:id="@+id/list_item_publicacion_textoNumComentarios"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="4dp"
+            android:layout_toRightOf="@+id/list_item_publicacion_textoNumLikes"
+            android:fontFamily="@font/roboto"
+            android:text="10 Comentarios"
+            android:textColor="@color/secondaryText"
+            android:textSize="13dp" />
+
+
+    </RelativeLayout>
+
+</LinearLayout>
+
+
