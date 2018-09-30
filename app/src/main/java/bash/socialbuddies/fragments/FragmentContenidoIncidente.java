@@ -67,7 +67,7 @@ public class FragmentContenidoIncidente extends Fragment {
         buttonMapa = ((Button) view.findViewById(R.id.fragment_contenido_incidente_button_mapa));
 
         Bundle bundle = getActivity().getIntent().getExtras();
-        BeanIncidente beanIncidente = (BeanIncidente) bundle.getSerializable(ActivityContenido.PUBLICACION_FILTRO);
+        BeanIncidente beanIncidente = (BeanIncidente) bundle.getSerializable(ActivityContenido.INCIDENTE_FILTRO);
 
         if (beanIncidente != null) {
             cargarDatos(beanIncidente);

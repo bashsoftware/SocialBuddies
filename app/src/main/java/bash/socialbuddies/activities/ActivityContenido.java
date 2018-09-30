@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 
 import bash.socialbuddies.R;
 import bash.socialbuddies.fragments.FragmentContenidoComentario;
+import bash.socialbuddies.fragments.FragmentContenidoIncidente;
 import bash.socialbuddies.fragments.FragmentContenidoPublicacionRegistro;
 
 public class ActivityContenido extends AppCompatActivity {
@@ -18,9 +19,11 @@ public class ActivityContenido extends AppCompatActivity {
 
     public static final int PUBLICACION_COMENTARIOS = 1;
     public static final int PUBLICACION_REGISTRO = 2;
+    public static final int INCIDENTE = 3;
 
     public static final String PUBLICACION_COMENTARIOS_FILTRO = "PUBLICACION_COMENTARIOS_FILTRO";
     public static final String PUBLICACION_FILTRO = "PUBLICACION_FILTRO";
+    public static final String INCIDENTE_FILTRO = "INCIDENTE_FILTRO";
 
     private FrameLayout frameLayout;
     private Toolbar toolbar;
@@ -57,6 +60,10 @@ public class ActivityContenido extends AppCompatActivity {
             case PUBLICACION_REGISTRO:
                 fragment = new FragmentContenidoPublicacionRegistro();
                 getSupportActionBar().setTitle("Nueva Publicación");
+                break;
+            case INCIDENTE:
+                fragment = new FragmentContenidoIncidente();
+                getSupportActionBar().setTitle("Detalle");
                 break;
             default:
                 finish();
