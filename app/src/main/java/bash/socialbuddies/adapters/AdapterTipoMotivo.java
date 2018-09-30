@@ -7,8 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 
@@ -40,7 +44,17 @@ public class AdapterTipoMotivo extends RecyclerView.Adapter<AdapterTipoMotivo.Ti
     public void onBindViewHolder(@NonNull AdapterTipoMotivo.TipoListaView viewHolder, final int position) {
         //viewHolder._imgIcono.setB
         viewHolder._txtNombre.setText(_motivosArray.get(position).getMot_titulo());
-
+        switch (_motivosArray.get(position).getMot_tipo()){
+            case "Choque":
+                viewHolder._imgIcono.setImageResource(R.drawable.ic_busca_carro);
+                break;
+            case "Socavon":
+                viewHolder._imgIcono.setImageResource(R.drawable.ic_busca_soca);
+                break;
+            case "Inundacion":
+                viewHolder._imgIcono.setImageResource(R.drawable.ic_busca_inu);
+                break;
+        }
         viewHolder._imgIcono.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
