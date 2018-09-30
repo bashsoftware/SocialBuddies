@@ -10,6 +10,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
+import java.text.DateFormat;
 import java.util.ArrayList;
 
 import bash.socialbuddies.R;
@@ -43,10 +47,11 @@ public class AdapterIncidenteLista extends RecyclerView.Adapter<AdapterIncidente
     @Override
     public void onBindViewHolder(@NonNull AdapterIncidenteLista.IncidenteView viewHolder, int position) {
         BeanIncidente ins = _incidentesArray.get(position);
-        viewHolder._txtTitulo.setText(_incidentesArray.get(position).getInc_titulo());
+        viewHolder._txtTitulo.setText(_incidentesArray.get(position).getMotivo().getMot_titulo());
         viewHolder._txtDescripcion.setText(_incidentesArray.get(position).getInc_descripcion());
         viewHolder._txtUsuNombre.setText(_incidentesArray.get(position).getBeanUsuario().getUsu_nombre());
-        viewHolder._txtFecha.setText(String.valueOf(_incidentesArray.get(position).getInc_fecha()));
+        viewHolder._txtFecha.setText(DateFormat.getDateTimeInstance().format(_incidentesArray.get(position).getInc_fecha()));
+        Glide.with(_context).load(_incidentesArray.get(position).getBeanUsuario().getUsu_perfil()).apply(RequestOptions.circleCropTransform()).into(viewHolder._imgUsuario);
     }
 
     @Override
@@ -62,6 +67,7 @@ public class AdapterIncidenteLista extends RecyclerView.Adapter<AdapterIncidente
         TextView _txtMotivo;
         TextView _txtUsuNombre;
         TextView _txtFecha;
+        ImageView _imgUsuario;
 
         public IncidenteView(View itemView) {
             super(itemView);
@@ -70,6 +76,7 @@ public class AdapterIncidenteLista extends RecyclerView.Adapter<AdapterIncidente
             _txtDescripcion = _view.findViewById(R.id.txtIncDescripcion);
             _txtFecha = _view.findViewById(R.id.txtIncFecha);
             _txtUsuNombre = _view.findViewById(R.id.txtIncUsuario);
+            _imgUsuario = _view.findViewById(R.id.imgIncUsuario);
         }
     }
 
