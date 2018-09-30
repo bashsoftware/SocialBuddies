@@ -100,10 +100,10 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
                     circleOptions.center(new LatLng(lat, lng));
                     circleOptions.fillColor(Color.argb(70, 3, 169, 244));
                     dibujarLineas(circleOptions, new LatLng(lat, lng));
-                    FragmentNuevoRegistroProblema.latLng = new BeanUbicacion(lat,lng);
+                    FragmentNuevoRegistroProblema.latLng = new BeanUbicacion(lat, lng);
                     ArrayList<BeanUbicacion> puntos = new ArrayList<>();
-                    for(MarkerOptions m:rangos){
-                        puntos.add(new BeanUbicacion(m.getPosition().latitude,m.getPosition().longitude));
+                    for (MarkerOptions m : rangos) {
+                        puntos.add(new BeanUbicacion(m.getPosition().latitude, m.getPosition().longitude));
                     }
                     FragmentNuevoRegistroProblema.puntos = puntos;
 
@@ -126,17 +126,20 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                for(BeanIncidente incidente:incidentes){
-                    if(incidente.getUbicacion().getLat() == marker.getPosition().latitude && incidente.getUbicacion().getLng() == marker.getPosition().longitude )
-                    {
-                        Intent intent = new Intent(getApplicationContext(), ActivityContenido.class);
-                        intent.putExtra(ActivityContenido.ESTATUS, ActivityContenido.INCIDENTE);
-                        intent.putExtra(ActivityContenido.INCIDENTE_FILTRO, incidente);
-                        startActivity(intent);
+                for (BeanIncidente incidente : incidentes) {
 
+                    if (incidente.getUbicacion().getLat() == marker.getPosition().latitude && incidente.getUbicacion().getLng() == marker.getPosition().longitude) {
+                        Intent intent = new Intent(getApplicationContext(), ActivityContenido.class);
+
+                        Bundle bundle = new Bundle();
+                        bundle.putInt(ActivityContenido.ESTATUS, ActivityContenido.INCIDENTE);
+                        bundle.putSerializable(ActivityContenido.INCIDENTE_FILTRO, incidente);
+                        intent.putExtras(bundle);
+
+                        startActivity(intent);
                     }
                 }
-                return  false;
+                return false;
             }
 
         });
@@ -145,15 +148,15 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
         reference.child("Choques").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot:dataSnapshot.getChildren()) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
-                    try{
+                    try {
                         BeanIncidente incidente = snapshot.getValue(BeanIncidente.class);
-                    incidente.setInc_id(snapshot.getKey());
-                    incidentes.add(incidente);
-                }catch (Exception ex){
+                        incidente.setInc_id(snapshot.getKey());
+                        incidentes.add(incidente);
+                    } catch (Exception ex) {
                         System.out.print(ex);
-                }
+                    }
                 }
                 setMarkers();
 
@@ -167,13 +170,13 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
         reference.child("Inundacion").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot:dataSnapshot.getChildren()) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
-                    try{
+                    try {
                         BeanIncidente incidente = snapshot.getValue(BeanIncidente.class);
                         incidente.setInc_id(snapshot.getKey());
                         incidentes.add(incidente);
-                    }catch (Exception ex){
+                    } catch (Exception ex) {
                         System.out.print(ex);
                     }
                 }
@@ -189,13 +192,13 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
         reference.child("Socavon").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot:dataSnapshot.getChildren()) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
-                    try{
+                    try {
                         BeanIncidente incidente = snapshot.getValue(BeanIncidente.class);
                         incidente.setInc_id(snapshot.getKey());
                         incidentes.add(incidente);
-                    }catch (Exception ex){
+                    } catch (Exception ex) {
                         System.out.print(ex);
                     }
                 }
@@ -238,7 +241,8 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
         mMap.addPolyline(poly);
 
     }
-    void dibujarLineas(CircleOptions circle,LatLng latLng) {
+
+    void dibujarLineas(CircleOptions circle, LatLng latLng) {
 
         PolylineOptions poly = new PolylineOptions();
         for (MarkerOptions m : rangos) {
@@ -252,40 +256,40 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
         mMap.addPolyline(poly);
 
     }
+
     void setMarkers() {
         lineas = new PolylineOptions();
 
 
-
-ArrayList<ArrayList<LatLng>> circulos = new ArrayList<>();
-        for(BeanIncidente incidente:incidentes){
+        ArrayList<ArrayList<LatLng>> circulos = new ArrayList<>();
+        for (BeanIncidente incidente : incidentes) {
             PolylineOptions poly = new PolylineOptions();
             ArrayList<LatLng> ll = new ArrayList<>();
 
-            for(int i =0;i<incidente.getPuntos().size();i++){
-                if(incidente.getMotivo().getMot_tipo().toString().toLowerCase().equals("inundacion")) {
+            for (int i = 0; i < incidente.getPuntos().size(); i++) {
+                if (incidente.getMotivo().getMot_tipo().toString().toLowerCase().equals("inundacion")) {
                     poly.color(Color.rgb(3, 169, 244));
-                }else if(incidente.getMotivo().getMot_tipo().toString().toLowerCase().equals("socavon")) {
+                } else if (incidente.getMotivo().getMot_tipo().toString().toLowerCase().equals("socavon")) {
                     poly.color(Color.rgb(201, 147, 94));
-                }else{
+                } else {
                     poly.color(Color.rgb(234, 246, 72));
                 }
 
-                poly.add(new LatLng(incidente.getPuntos().get(i).getLat(),incidente.getPuntos().get(i).getLng()));
+                poly.add(new LatLng(incidente.getPuntos().get(i).getLat(), incidente.getPuntos().get(i).getLng()));
 
-                ll.add(new LatLng(incidente.getPuntos().get(i).getLat(),incidente.getPuntos().get(i).getLng()));
+                ll.add(new LatLng(incidente.getPuntos().get(i).getLat(), incidente.getPuntos().get(i).getLng()));
             }
             circulos.add(ll);
 
-            poly.add(new LatLng(incidente.getPuntos().get(0).getLat(),incidente.getPuntos().get(0).getLng()));
+            poly.add(new LatLng(incidente.getPuntos().get(0).getLat(), incidente.getPuntos().get(0).getLng()));
 
 
-            for(LatLng l:ll){
+            for (LatLng l : ll) {
 
                 double lat = 0, lng = 0;
                 int i = 0;
 
-                for (LatLng inc: ll ){
+                for (LatLng inc : ll) {
                     i++;
                     lat += inc.latitude;
                     lng += inc.longitude;
@@ -293,11 +297,11 @@ ArrayList<ArrayList<LatLng>> circulos = new ArrayList<>();
                 }
                 lat = lat / i;
                 lng = lng / i;
-                if(incidente.getMotivo().getMot_tipo().toString().toLowerCase().equals("inundacion")) {
+                if (incidente.getMotivo().getMot_tipo().toString().toLowerCase().equals("inundacion")) {
                     mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).icon(BitmapDescriptorFactory.fromResource(R.drawable.a)).title(incidente.getInc_titulo()).snippet(incidente.getInc_descripcion()));
-                }else if(incidente.getMotivo().getMot_tipo().toString().toLowerCase().equals("socavon")) {
+                } else if (incidente.getMotivo().getMot_tipo().toString().toLowerCase().equals("socavon")) {
                     mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).icon(BitmapDescriptorFactory.fromResource(R.drawable.c)).title(incidente.getInc_titulo()).snippet(incidente.getInc_descripcion()));
-                }else{
+                } else {
                     mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).icon(BitmapDescriptorFactory.fromResource(R.drawable.b)).title(incidente.getInc_titulo()).snippet(incidente.getInc_descripcion()));
 
                 }
@@ -305,7 +309,7 @@ ArrayList<ArrayList<LatLng>> circulos = new ArrayList<>();
                 float[] f, f1;
                 LatLng mayor = new LatLng(lat, lng);
                 ArrayList<Float> mayores = new ArrayList<>();
-                for (LatLng in:ll) {
+                for (LatLng in : ll) {
                     f = new float[1];
                     f1 = new float[1];
                     Location.distanceBetween(lat, lng, in.latitude, in.longitude, f);
@@ -321,11 +325,11 @@ ArrayList<ArrayList<LatLng>> circulos = new ArrayList<>();
                 circleOptions.strokeWidth(3f);
                 circleOptions.radius(measure(lat, lng, mayor.latitude, mayor.longitude));
                 circleOptions.center(new LatLng(lat, lng));
-                if(incidente.getMotivo().getMot_tipo().toString().toLowerCase().equals("inundacion")) {
+                if (incidente.getMotivo().getMot_tipo().toString().toLowerCase().equals("inundacion")) {
                     circleOptions.fillColor(Color.argb(70, 3, 169, 244));
-                }else if(incidente.getMotivo().getMot_tipo().toString().toLowerCase().equals("socavon")) {
+                } else if (incidente.getMotivo().getMot_tipo().toString().toLowerCase().equals("socavon")) {
                     circleOptions.fillColor(Color.argb(70, 201, 147, 94));
-                }else{
+                } else {
                     circleOptions.fillColor(Color.argb(70, 234, 246, 72));
                 }
 
@@ -333,14 +337,10 @@ ArrayList<ArrayList<LatLng>> circulos = new ArrayList<>();
                 mMap.addCircle(circleOptions);
 
 
-
             }
 
 
-
-
         }
-
 
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {

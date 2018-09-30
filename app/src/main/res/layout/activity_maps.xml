@@ -11,6 +11,7 @@
         android:layout_height="match_parent"
         tools:context=".activities.MapsActivityRegistro" />
     <android.support.design.widget.FloatingActionButton
+        android:src="@drawable/ic_check"
         android:id="@+id/activity_maps_float"
         android:layout_gravity="center_horizontal|bottom"
         android:layout_width="50dp"

@@ -1,52 +1,58 @@
 package bash.socialbuddies.fragments;
 
-import android.support.v4.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
 import bash.socialbuddies.R;
+import bash.socialbuddies.activities.ActivityContenido;
 import bash.socialbuddies.adapters.AdapterIncidenteLista;
 import bash.socialbuddies.adapters.AdapterTipoMotivo;
 import bash.socialbuddies.beans.BeanIncidente;
 import bash.socialbuddies.beans.BeanMotivo;
-import bash.socialbuddies.behavior.ItemClickSupport;
-import bash.socialbuddies.interfaces.*;
-import bash.socialbuddies.utilities.FirebaseReference;
+import bash.socialbuddies.interfaces.OnCallBackBusqueda;
+import bash.socialbuddies.interfaces.OnCallBackSelTipo;
 
 public class FragmentBusqueda extends Fragment implements OnCallBackBusqueda, OnCallBackSelTipo {
     private RecyclerView _recyclerTipos;
-    private RecyclerView _recyclerIncidentes;
+    private ListView listView;
     private AdapterTipoMotivo _adapterTipoMotivo;
     private AdapterIncidenteLista _adapterIncidentes;
     private DataBaseUtil dbUtil;
 
+    private ArrayList<BeanIncidente> beanIncidentes;
+
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_busqueda, container, false);
         super.onCreate(savedInstanceState);
 
         _recyclerTipos = view.findViewById(R.id.rwFrgBusTipos);
-        _recyclerIncidentes = view.findViewById(R.id.rwFrgIncLista);
+        listView = view.findViewById(R.id.rwFrgIncLista);
         initDataBase();
 
-        ItemClickSupport.addTo(_recyclerIncidentes).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getContext(), ActivityContenido.class);
+
+                Bundle bundle = new Bundle();
+                bundle.putInt(ActivityContenido.ESTATUS, ActivityContenido.INCIDENTE);
+                bundle.putSerializable(ActivityContenido.INCIDENTE_FILTRO, beanIncidentes.get(position));
+                intent.putExtras(bundle);
+
+                startActivity(intent);
             }
         });
 
@@ -57,7 +63,6 @@ public class FragmentBusqueda extends Fragment implements OnCallBackBusqueda, On
         dbUtil = new DataBaseUtil();
         dbUtil.obtieneIncidentes(this, "");
         dbUtil.obtieneTiposMotivos(this);
-
     }
 
     @Override
@@ -70,11 +75,10 @@ public class FragmentBusqueda extends Fragment implements OnCallBackBusqueda, On
 
     @Override
     public void onGetIncidentes(ArrayList<BeanIncidente> arrayIncidentes) {
-        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-        _recyclerIncidentes.setLayoutManager(horizontalLayoutManager);
-        _adapterIncidentes = new AdapterIncidenteLista(getActivity().getApplicationContext(), arrayIncidentes);
-        _recyclerIncidentes.setAdapter(_adapterIncidentes);
-
+        beanIncidentes = arrayIncidentes;
+        _adapterIncidentes = new AdapterIncidenteLista(getContext(), beanIncidentes);
+        listView.setAdapter(_adapterIncidentes);
+        _adapterIncidentes.notifyDataSetChanged();
     }
 
     @Override

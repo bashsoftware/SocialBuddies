@@ -60,59 +60,7 @@ public class MapsActivityRegistro extends FragmentActivity implements OnMapReady
             @Override
             public void onClick(View v) {
 
-                if (FragmentNuevoRegistroProblema.latLng != null) {
-
-                    //finalize();
-                    double lat = 0, lng = 0;
-                    int i = 0;
-
-                    for (MarkerOptions marke : rangos) {
-                        i++;
-                        lat += marke.getPosition().latitude;
-                        lng += marke.getPosition().longitude;
-
-                    }
-                    lat = lat / i;
-                    lng = lng / i;
-                    mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).icon(BitmapDescriptorFactory.fromResource(R.drawable.a)).title("final").snippet("snippet final"));
-
-                    int j = 0;
-                    float[] f, f1;
-                    LatLng mayor = new LatLng(lat, lng);
-                    ArrayList<Float> mayores = new ArrayList<>();
-                    for (MarkerOptions marke : rangos) {
-                        f = new float[1];
-                        f1 = new float[1];
-                        Location.distanceBetween(lat, lng, marke.getPosition().latitude, marke.getPosition().longitude, f);
-                        Location.distanceBetween(lat, lng, mayor.latitude, mayor.longitude, f1);
-                        if (f[0] > f1[0]) {
-                            mayor = new LatLng(marke.getPosition().latitude, marke.getPosition().longitude);
-
-                        }
-                    }
-
-                    CircleOptions circleOptions = new CircleOptions();
-                    circleOptions.strokeColor(R.color.colorPrimary);
-                    circleOptions.strokeWidth(3f);
-                    circleOptions.radius(measure(lat, lng, mayor.latitude, mayor.longitude));
-                    circleOptions.center(new LatLng(lat, lng));
-                    circleOptions.fillColor(Color.argb(70, 3, 169, 244));
-                    dibujarLineas(circleOptions, new LatLng(lat, lng));
-                    FragmentNuevoRegistroProblema.latLng = new BeanUbicacion(lat,lng);
-                    ArrayList<BeanUbicacion> puntos = new ArrayList<>();
-                    for(MarkerOptions m:rangos){
-                        puntos.add(new BeanUbicacion(m.getPosition().latitude,m.getPosition().longitude));
-                    }
-                    FragmentNuevoRegistroProblema.puntos = puntos;
-                    try {
-                        this.finalize();
-                    } catch (Throwable throwable) {
-                        throwable.printStackTrace();
-                    }
-
-                } else {
-                    Toast.makeText(getApplicationContext(), "Seleccione Un Logar", Toast.LENGTH_SHORT).show();
-                }
+                finish();
             }
         });
 
@@ -142,6 +90,59 @@ public class MapsActivityRegistro extends FragmentActivity implements OnMapReady
                     rangos.add(markerOptions);
                     areaMarcadores();
                     FragmentNuevoRegistroProblema.latLng = new BeanUbicacion(latLng.latitude,latLng.longitude);
+                    if (FragmentNuevoRegistroProblema.latLng != null) {
+
+                        //finalize();
+                        double lat = 0, lng = 0;
+                        int i = 0;
+
+                        for (MarkerOptions marke : rangos) {
+                            i++;
+                            lat += marke.getPosition().latitude;
+                            lng += marke.getPosition().longitude;
+
+                        }
+                        lat = lat / i;
+                        lng = lng / i;
+                        mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).icon(BitmapDescriptorFactory.fromResource(R.drawable.a)).title("final").snippet("snippet final"));
+
+                        int j = 0;
+                        float[] f, f1;
+                        LatLng mayor = new LatLng(lat, lng);
+                        ArrayList<Float> mayores = new ArrayList<>();
+                        for (MarkerOptions marke : rangos) {
+                            f = new float[1];
+                            f1 = new float[1];
+                            Location.distanceBetween(lat, lng, marke.getPosition().latitude, marke.getPosition().longitude, f);
+                            Location.distanceBetween(lat, lng, mayor.latitude, mayor.longitude, f1);
+                            if (f[0] > f1[0]) {
+                                mayor = new LatLng(marke.getPosition().latitude, marke.getPosition().longitude);
+
+                            }
+                        }
+
+                        CircleOptions circleOptions = new CircleOptions();
+                        circleOptions.strokeColor(R.color.colorPrimary);
+                        circleOptions.strokeWidth(3f);
+                        circleOptions.radius(measure(lat, lng, mayor.latitude, mayor.longitude));
+                        circleOptions.center(new LatLng(lat, lng));
+                        circleOptions.fillColor(Color.argb(70, 3, 169, 244));
+                        dibujarLineas(circleOptions, new LatLng(lat, lng));
+                        FragmentNuevoRegistroProblema.latLng = new BeanUbicacion(lat,lng);
+                        ArrayList<BeanUbicacion> puntos = new ArrayList<>();
+                        for(MarkerOptions m:rangos){
+                            puntos.add(new BeanUbicacion(m.getPosition().latitude,m.getPosition().longitude));
+                        }
+                        FragmentNuevoRegistroProblema.puntos = puntos;
+                        try {
+                            this.finalize();
+                        } catch (Throwable throwable) {
+                            throwable.printStackTrace();
+                        }
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Seleccione Un Logar", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {

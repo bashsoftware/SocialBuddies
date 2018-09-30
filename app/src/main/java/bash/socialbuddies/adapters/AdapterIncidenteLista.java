@@ -2,11 +2,11 @@ package bash.socialbuddies.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,72 +14,52 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.text.DateFormat;
-import java.util.ArrayList;
+import java.util.List;
 
 import bash.socialbuddies.R;
 import bash.socialbuddies.beans.BeanIncidente;
-import bash.socialbuddies.beans.BeanMotivo;
 
-public class AdapterIncidenteLista extends RecyclerView.Adapter<AdapterIncidenteLista.IncidenteView> {
-    private ArrayList<BeanIncidente> _incidentesArray;
-    private Context _context;
-    private LayoutInflater _inflater;
+public class AdapterIncidenteLista extends ArrayAdapter {
 
-    public AdapterIncidenteLista(Context context, ArrayList<BeanIncidente> incidentes) {
-        _inflater = LayoutInflater.from(context);
-        _context = context;
-        _incidentesArray = incidentes;
-    }
+    Context context;
 
-    public void clear(){
-        final int size = _incidentesArray.size();
-        _incidentesArray.clear();
-        notifyItemRangeRemoved(0, size);
+    public AdapterIncidenteLista(Context context, List beans) {
+        super(context, 0, beans);
+        this.context = context;
     }
 
     @NonNull
     @Override
-    public AdapterIncidenteLista.IncidenteView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = _inflater.inflate(R.layout.incidente_row, parent, false);
-        return new AdapterIncidenteLista.IncidenteView(view);
-    }
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-    @Override
-    public void onBindViewHolder(@NonNull AdapterIncidenteLista.IncidenteView viewHolder, int position) {
-        BeanIncidente ins = _incidentesArray.get(position);
-        viewHolder._txtTitulo.setText(_incidentesArray.get(position).getMotivo().getMot_titulo());
-        viewHolder._txtDescripcion.setText(_incidentesArray.get(position).getInc_descripcion());
-        viewHolder._txtUsuNombre.setText(_incidentesArray.get(position).getBeanUsuario().getUsu_nombre());
-        viewHolder._txtFecha.setText(DateFormat.getDateTimeInstance().format(_incidentesArray.get(position).getInc_fecha()));
-        Glide.with(_context).load(_incidentesArray.get(position).getBeanUsuario().getUsu_perfil()).apply(RequestOptions.circleCropTransform()).into(viewHolder._imgUsuario);
-    }
+        View view = convertView;
 
-    @Override
-    public int getItemCount() {
-        return _incidentesArray.size();
-    }
-
-
-    public class IncidenteView extends RecyclerView.ViewHolder {
-        View _view;
-        TextView _txtTitulo;
-        TextView _txtDescripcion;
-        TextView _txtMotivo;
-        TextView _txtUsuNombre;
-        TextView _txtFecha;
-        ImageView _imgUsuario;
-
-        public IncidenteView(View itemView) {
-            super(itemView);
-            _view = itemView;
-            _txtTitulo = _view.findViewById(R.id.txtIncTitulo);
-            _txtDescripcion = _view.findViewById(R.id.txtIncDescripcion);
-            _txtFecha = _view.findViewById(R.id.txtIncFecha);
-            _txtUsuNombre = _view.findViewById(R.id.txtIncUsuario);
-            _imgUsuario = _view.findViewById(R.id.imgIncUsuario);
+        if (view == null) {
+            view = LayoutInflater.from(getContext()).inflate(R.layout.incidente_row, parent, false);
         }
+
+        TextView _txtTitulo = view.findViewById(R.id.txtIncTitulo);
+        TextView _txtDescripcion = view.findViewById(R.id.txtIncDescripcion);
+        TextView _txtFecha = view.findViewById(R.id.txtIncFecha);
+        TextView _txtUsuNombre = view.findViewById(R.id.txtIncUsuario);
+        ImageView _imgUsuario = view.findViewById(R.id.imgIncUsuario);
+
+        BeanIncidente ins = ((BeanIncidente) getItem(position));
+
+        _txtTitulo.setText(ins.getMotivo().getMot_titulo());
+        _txtDescripcion.setText(ins.getInc_descripcion());
+        _txtUsuNombre.setText(ins.getBeanUsuario().getUsu_nombre());
+        _txtFecha.setText(DateFormat.getDateTimeInstance().format(ins.getInc_fecha()));
+        Glide.with(context).load(ins.getBeanUsuario().getUsu_perfil()).apply(RequestOptions.circleCropTransform()).into(_imgUsuario);
+
+        return view;
     }
 
+    @Nullable
+    @Override
+    public Object getItem(int position) {
+        return super.getItem(position);
+    }
 
 }
 

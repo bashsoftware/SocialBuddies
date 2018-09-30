@@ -26,7 +26,10 @@
         <activity
             android:name=".activities.MapsActivityRegistro"
             android:label="Map"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>   <activity
+        android:name=".activities.ActivityMapa"
+        android:label="Map"
+        android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <activity
             android:name=".activities.MapsActivityLugares"
