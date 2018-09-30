@@ -23,9 +23,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import bash.socialbuddies.R;
 import bash.socialbuddies.beans.BeanUsuario;
+import bash.socialbuddies.fragments.FragmentBusqueda;
 import bash.socialbuddies.fragments.FragmentContenidoPublicaciones;
-import bash.socialbuddies.fragments.FragmentVacio;
 import bash.socialbuddies.fragments.FragmentNuevoRegistroProblema;
+import bash.socialbuddies.fragments.FragmentVacio;
 import bash.socialbuddies.utilities.FirebaseReference;
 import bash.socialbuddies.utilities.Singleton;
 
@@ -43,8 +44,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
-
-
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -114,22 +113,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.main_activity_menu_drawer_publicaciones:
                 fragment = new FragmentContenidoPublicaciones();
-                getSupportActionBar().setTitle("Publicaciones");
                 break;
 
             case R.id.main_activity_menu_drawer_lista:
-                getSupportActionBar().setTitle("Inicio");
-                fragment = new FragmentVacio();
+                fragment = new FragmentBusqueda();
                 break;
 
             case R.id.main_activity_menu_drawer_config:
-                getSupportActionBar().setTitle("Configuración");
                 fragment = new FragmentVacio();
                 break;
 
             case R.id.main_activity_menu_drawer__cerrar:
-              //  logout();
-              fragment = new FragmentNuevoRegistroProblema();
+        fragment = new FragmentNuevoRegistroProblema();
                 break;
 
         }
