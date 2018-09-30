@@ -27,6 +27,12 @@ public class AdapterIncidenteLista extends RecyclerView.Adapter<AdapterIncidente
         _incidentesArray = incidentes;
     }
 
+    public void clear(){
+        final int size = _incidentesArray.size();
+        _incidentesArray.clear();
+        notifyItemRangeRemoved(0, size);
+    }
+
     @NonNull
     @Override
     public AdapterIncidenteLista.IncidenteView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -66,5 +72,7 @@ public class AdapterIncidenteLista extends RecyclerView.Adapter<AdapterIncidente
             _txtUsuNombre = _view.findViewById(R.id.txtIncUsuario);
         }
     }
+
+
 }
 
