@@ -24,6 +24,7 @@ import java.util.List;
 
 import bash.socialbuddies.R;
 import bash.socialbuddies.activities.ActivityContenido;
+import bash.socialbuddies.activities.ActivityMapa;
 import bash.socialbuddies.beans.BeanIncidente;
 import bash.socialbuddies.beans.BeanUsuario;
 import bash.socialbuddies.utilities.FirebaseReference;
@@ -73,6 +74,16 @@ public class AdaptadorIncidentes extends RecyclerView.Adapter<AdaptadorIncidente
             @Override
             public void onClick(View v) {
                 verComentarios(beanIncidente);
+            }
+        });
+        holder.buttonMapa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context,ActivityMapa.class);
+                i.putExtra("lat",beanIncidente.getUbicacion().getLat());
+                i.putExtra("lng",beanIncidente.getUbicacion().getLng());
+                ActivityMapa.puntos = beanIncidente.getPuntos() ;
+                context.startActivity(i);
             }
         });
 
