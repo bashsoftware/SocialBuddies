@@ -13,7 +13,9 @@ public class BeanIncidente {
     private ArrayList<BeanUbicacion> puntos;
     private String inc_id;
 
-    public BeanIncidente(){}
+    public BeanIncidente() {
+    }
+
     public String getInc_titulo() {
         return inc_titulo;
     }
