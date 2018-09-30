@@ -82,7 +82,7 @@ public class FragmentNuevoRegistroProblema extends Fragment {
             incidente.setUsuario(usuario);
             incidente.setMotivo(motivo);
             incidente.setPuntos(puntos);
-            db.child(FirebaseReference.INCIDENTES).push().setValue(incidente);
+            db.child(FirebaseReference.INCIDENTES).child(incidente.getMotivo().getMot_tipo()).push().setValue(incidente);
 
             latLng = null;
 
