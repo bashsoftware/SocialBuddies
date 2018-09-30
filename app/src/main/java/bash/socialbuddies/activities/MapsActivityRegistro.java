@@ -74,7 +74,7 @@ public class MapsActivityRegistro extends FragmentActivity implements OnMapReady
                     }
                     lat = lat / i;
                     lng = lng / i;
-                    mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_water)).title("final").snippet("snippet final"));
+                    mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).icon(BitmapDescriptorFactory.fromResource(R.drawable.a)).title("final").snippet("snippet final"));
 
                     int j = 0;
                     float[] f, f1;
@@ -225,7 +225,7 @@ public class MapsActivityRegistro extends FragmentActivity implements OnMapReady
         poly.color(Color.rgb(3, 169, 244));
         poly.add(rangos.get(0).getPosition());
         mMap.addCircle(circle);
-        mMap.addMarker(new MarkerOptions().position(latLng).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_water)));
+        mMap.addMarker(new MarkerOptions().position(latLng).icon(BitmapDescriptorFactory.fromResource(R.drawable.a)));
         mMap.addPolyline(poly);
 
     }

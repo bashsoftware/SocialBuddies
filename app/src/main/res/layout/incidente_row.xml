@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#4C8659"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/txtIncTitulo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="17sp"
+            android:textColor="#FFFF"
+            android:text="Un ovni bajo a Torreon"
+            android:fontFamily="@font/roboto"/>
+
+
+        <ImageView
+            android:id="@+id/imgIncTipo"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/ic_dashboard"/>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/txtIncDescripcion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F7FAF8"
+        android:maxLines="9"
+        android:minLines="4"
+        android:padding="5dp"
+        android:singleLine="false"
+        android:fontFamily="@font/roboto"
+        android:textColor="#303030"
+        android:text="dawdwadwadwadwad dawdwadwadwadwad  dawdwadw dawdwadwadwadwad dawdwadwadwadwad  dawdwadw dawdwadwadwadwad dawdwadwadwadwad  dawdwadw dawdwadwadwadwad dawdwadwadwadwad  dawdwadw dawdwadwadwadwad dawdwadwadwadwad  dawdwadw dawdwadwadwadwad dawdwadwadwadwad  dawdwadw dawdwadwadwadwad dawdwadwadwadwad  dawdwadw dawdwadwadwadwad dawdwadwadwadwad  dawdwadw" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F7FAF8"
+        android:paddingBottom="10dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/txtIncUsuario"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Daniel Contreras"
+            android:fontFamily="@font/roboto"
+            android:textColor="#303030"/>
+
+        <TextView
+            android:id="@+id/txtIncFecha"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="10 julio del 2018"
+            android:fontFamily="@font/roboto"
+            android:textColor="#303030"/>
+    </LinearLayout>
+</LinearLayout>
