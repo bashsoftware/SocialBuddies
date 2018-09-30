@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import bash.socialbuddies.R;
+import bash.socialbuddies.fragments.FragmentContenidoPublicaciones;
 import bash.socialbuddies.fragments.FragmentVacio;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -67,11 +68,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (itemId) {
             case R.id.main_activity_menu_drawer_mapa:
-                fragment = new FragmentVacio();
+                intent = new Intent(getApplicationContext(), MapsActivity.class);
                 break;
 
             case R.id.main_activity_menu_drawer_publicaciones:
-                fragment = new FragmentVacio();
+                fragment = new FragmentContenidoPublicaciones();
                 break;
 
             case R.id.main_activity_menu_drawer_lista:

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_nuevo_registro_publicacion_imagen_imageView"
+    android:layout_width="96dp"
+    android:layout_height="96dp"
+    android:layout_margin="4dp"
+    android:background="@color/divider"
+    android:padding="8dp"
+    android:scaleType="centerCrop" />
