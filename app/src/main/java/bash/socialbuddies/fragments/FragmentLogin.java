@@ -53,7 +53,7 @@ public class FragmentLogin extends Fragment {
 
         callbackManager = CallbackManager.Factory.create();
 
-        loginButton.setReadPermissions(Arrays.asList("email", "public_profile"));
+        loginButton.setReadPermissions(Arrays.asList("email", "public_profile", "user_friends"));
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
