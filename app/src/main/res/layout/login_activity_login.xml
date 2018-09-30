@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:hint="@string/activity_login_edittext_email"
-        android:textAlignment="center"/>
+        android:textAlignment="center"
+        android:inputType="textEmailAddress"/>
 
     <EditText
         android:id="@+id/edtPass"
@@ -21,7 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:hint="@string/activity_login_edittext_contrasena"
-        android:textAlignment="center"/>
+        android:textAlignment="center"
+        android:inputType="textPassword"/>
 
     <Button
         android:id="@+id/btnLogin"
@@ -35,7 +37,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/activity_login_textview_registro"
-        android:padding="10dp"/>
+        android:padding="10dp"
+        />
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"

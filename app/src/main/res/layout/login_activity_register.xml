@@ -59,9 +59,15 @@
             android:textAlignment="center"
             android:inputType="number"/>
 
+    <ImageButton
+        android:id="@+id/imgPerfil"
+        android:layout_below="@id/edtEdadRegister"
+        android:layout_width="match_parent"
+        android:layout_height="200px" />
+
         <Button
             android:id="@+id/btnRegister"
-            android:layout_below="@id/edtEdadRegister"
+            android:layout_below="@id/imgPerfil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Registrar"

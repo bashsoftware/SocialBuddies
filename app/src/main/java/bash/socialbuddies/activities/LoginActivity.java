@@ -1,6 +1,7 @@
 package bash.socialbuddies.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,8 @@ import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -20,6 +23,9 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import org.json.JSONObject;
 
@@ -34,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private FrameLayout frmContainer;
     private DatabaseReference database;
+    private StorageReference storage;
 
     private int fragmentActual = 0;
 
@@ -67,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void initControls() {
         database = FirebaseDatabase.getInstance().getReference();
+        storage = FirebaseStorage.getInstance().getReference();
         frmContainer = findViewById(R.id.container_login);
     }
 
@@ -110,24 +118,38 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void register(final BeanUsuario usuario, String password) {
+    public void register(final BeanUsuario usuario, String password, final Uri uri) {
 
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(usuario.getUsu_correo(), password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if (task.isSuccessful()) {
-
                     usuario.setUsu_id(task.getResult().getUser().getUid());
 
-                    database.child(FirebaseReference.USUARIOS).child(usuario.getUsu_id()).setValue(usuario).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    StorageReference filePath = storage.child("Imagenes").child(uri.getLastPathSegment());
+
+                    filePath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(getApplicationContext(), "USUARIOS registrado con éxito", Toast.LENGTH_SHORT).show();
-                            }
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            usuario.setUsu_perfil(taskSnapshot.getDownloadUrl().toString());
+                            database.child(FirebaseReference.USUARIOS).child(usuario.getUsu_id()).setValue(usuario).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(getApplicationContext(), "USUARIOS registrado con éxito", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getApplicationContext(), "Ocurrio un error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
+
+
 
                 } else {
                     Toast.makeText(getApplicationContext(), "Error al iniciar sesión " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -147,8 +169,8 @@ public class LoginActivity extends AppCompatActivity {
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         try {
                             BeanUsuario usuario = Singleton.getInstancia().getBeanUsuario();
-                            //usuario.setUsu_nombre(response.getJSONObject().getString("first_name"));
-                            //usuario.setUsu_apellido(response.getJSONObject().getString("last_name"));
+                            usuario.setUsu_nombre(response.getJSONObject().getString("first_name"));
+                            usuario.setUsu_apellido(response.getJSONObject().getString("last_name"));
                             usuario.setUsu_correo(response.getJSONObject().getString("email"));
                             usuario.setUsu_edad(18);
                         } catch (Exception e) {
@@ -190,7 +212,10 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        ((FragmentLogin)fragment).onActivityResult(requestCode,resultCode,data);
+       /* if(requestCode != 10){
+            ((FragmentLogin)fragment).onActivityResult(requestCode,resultCode,data);
+        }*/
+
 
     }
 }
