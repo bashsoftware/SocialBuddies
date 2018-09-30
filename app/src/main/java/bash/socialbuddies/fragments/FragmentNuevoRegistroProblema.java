@@ -20,7 +20,6 @@ import bash.socialbuddies.activities.MapsActivityRegistro;
 import bash.socialbuddies.beans.BeanMotivo;
 import bash.socialbuddies.beans.BeanUbicacion;
 import bash.socialbuddies.beans.BeanUsuario;
-import bash.socialbuddies.beans.beanIncidente;
 import bash.socialbuddies.utilities.FirebaseReference;
 import bash.socialbuddies.utilities.Singleton;
 
@@ -69,7 +68,7 @@ public class FragmentNuevoRegistroProblema extends Fragment {
             BeanUsuario usuario = Singleton.getInstancia().getBeanUsuario();
 
 
-            BeanMotivo motivo = new BeanMotivo();
+          /*  BeanMotivo motivo = new BeanMotivo();
             motivo.setTipo(descripcion.getText().toString());
             motivo.setTitulo(titulo.getText().toString());
 
@@ -83,7 +82,7 @@ public class FragmentNuevoRegistroProblema extends Fragment {
             incidente.setInc_decripcion(descripcion.getText().toString());
             db.child(FirebaseReference.INCIDENTES).push().setValue(incidente);
 
-            latLng = null;
+            latLng = null;*/
 
         }
     }
