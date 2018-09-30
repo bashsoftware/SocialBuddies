@@ -1,6 +1,7 @@
 package bash.socialbuddies.activities;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
@@ -56,7 +57,6 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
         button = (FloatingActionButton) findViewById(R.id.activity_maps_float);
 
 
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,7 +106,8 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
                         puntos.add(new BeanUbicacion(m.getPosition().latitude,m.getPosition().longitude));
                     }
                     FragmentNuevoRegistroProblema.puntos = puntos;
-                        finish();
+
+                    finish();
 
                 } else {
                     Toast.makeText(getApplicationContext(), "Seleccione Un Logar", Toast.LENGTH_SHORT).show();
@@ -122,6 +123,23 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
         mMap = googleMap;
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(25.544846, -103.406460), 13));
         incidentes = new ArrayList<>();
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                for(BeanIncidente incidente:incidentes){
+                    if(incidente.getUbicacion().getLat() == marker.getPosition().latitude && incidente.getUbicacion().getLng() == marker.getPosition().longitude )
+                    {
+                        Intent intent = new Intent(getApplicationContext(), ActivityContenido.class);
+                        intent.putExtra(ActivityContenido.ESTATUS, ActivityContenido.INCIDENTE);
+                        intent.putExtra(ActivityContenido.INCIDENTE_FILTRO, incidente);
+                        startActivity(intent);
+
+                    }
+                }
+                return  false;
+            }
+
+        });
 
         reference = FirebaseDatabase.getInstance().getReference(FirebaseReference.INCIDENTES);
         reference.child("Choques").addValueEventListener(new ValueEventListener() {
@@ -234,26 +252,20 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
         mMap.addPolyline(poly);
 
     }
-    void setMarkers(){
+    void setMarkers() {
         lineas = new PolylineOptions();
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                Toast.makeText(getApplicationContext(), "toast" + marker.getPosition(), Toast.LENGTH_SHORT).show();
 
-                return false;
-            }
-        });
 
 
 ArrayList<ArrayList<LatLng>> circulos = new ArrayList<>();
         for(BeanIncidente incidente:incidentes){
             PolylineOptions poly = new PolylineOptions();
             ArrayList<LatLng> ll = new ArrayList<>();
+
             for(int i =0;i<incidente.getPuntos().size();i++){
-                if(incidente.getMotivo().getMot_titulo().toString().toLowerCase().equals("inundacion")) {
+                if(incidente.getMotivo().getMot_tipo().toString().toLowerCase().equals("inundacion")) {
                     poly.color(Color.rgb(3, 169, 244));
-                }else if(incidente.getMotivo().getMot_titulo().toString().toLowerCase().equals("socavon")) {
+                }else if(incidente.getMotivo().getMot_tipo().toString().toLowerCase().equals("socavon")) {
                     poly.color(Color.rgb(201, 147, 94));
                 }else{
                     poly.color(Color.rgb(234, 246, 72));
@@ -269,7 +281,7 @@ ArrayList<ArrayList<LatLng>> circulos = new ArrayList<>();
 
 
             for(LatLng l:ll){
-                //finalize();
+
                 double lat = 0, lng = 0;
                 int i = 0;
 
@@ -281,9 +293,9 @@ ArrayList<ArrayList<LatLng>> circulos = new ArrayList<>();
                 }
                 lat = lat / i;
                 lng = lng / i;
-                if(incidente.getMotivo().getMot_titulo().toString().toLowerCase().equals("inundacion")) {
+                if(incidente.getMotivo().getMot_tipo().toString().toLowerCase().equals("inundacion")) {
                     mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).icon(BitmapDescriptorFactory.fromResource(R.drawable.a)).title(incidente.getInc_titulo()).snippet(incidente.getInc_descripcion()));
-                }else if(incidente.getMotivo().getMot_titulo().toString().toLowerCase().equals("socavon")) {
+                }else if(incidente.getMotivo().getMot_tipo().toString().toLowerCase().equals("socavon")) {
                     mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).icon(BitmapDescriptorFactory.fromResource(R.drawable.c)).title(incidente.getInc_titulo()).snippet(incidente.getInc_descripcion()));
                 }else{
                     mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).icon(BitmapDescriptorFactory.fromResource(R.drawable.b)).title(incidente.getInc_titulo()).snippet(incidente.getInc_descripcion()));
@@ -309,9 +321,9 @@ ArrayList<ArrayList<LatLng>> circulos = new ArrayList<>();
                 circleOptions.strokeWidth(3f);
                 circleOptions.radius(measure(lat, lng, mayor.latitude, mayor.longitude));
                 circleOptions.center(new LatLng(lat, lng));
-                if(incidente.getMotivo().getMot_titulo().toString().toLowerCase().equals("inundacion")) {
+                if(incidente.getMotivo().getMot_tipo().toString().toLowerCase().equals("inundacion")) {
                     circleOptions.fillColor(Color.argb(70, 3, 169, 244));
-                }else if(incidente.getMotivo().getMot_titulo().toString().toLowerCase().equals("socavon")) {
+                }else if(incidente.getMotivo().getMot_tipo().toString().toLowerCase().equals("socavon")) {
                     circleOptions.fillColor(Color.argb(70, 201, 147, 94));
                 }else{
                     circleOptions.fillColor(Color.argb(70, 234, 246, 72));
