@@ -12,7 +12,7 @@ public class BeanIncidente {
     private BeanUbicacion ubicacion;
     private ArrayList<BeanUbicacion> puntos;
     private String inc_id;
-
+    private String inc_tipo;
     public BeanIncidente() {
     }
 
@@ -87,4 +87,9 @@ public class BeanIncidente {
     public void setInc_id(String inc_id) {
         this.inc_id = inc_id;
     }
+
+    public String getInc_tipo() {
+        return inc_tipo;
+    }
+
 }

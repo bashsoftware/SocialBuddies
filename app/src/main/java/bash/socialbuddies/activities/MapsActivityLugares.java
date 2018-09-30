@@ -106,11 +106,7 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
                         puntos.add(new BeanUbicacion(m.getPosition().latitude,m.getPosition().longitude));
                     }
                     FragmentNuevoRegistroProblema.puntos = puntos;
-                    try {
-                        this.finalize();
-                    } catch (Throwable throwable) {
-                        throwable.printStackTrace();
-                    }
+                        finish();
 
                 } else {
                     Toast.makeText(getApplicationContext(), "Seleccione Un Logar", Toast.LENGTH_SHORT).show();
@@ -196,7 +192,6 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
     }
     void setMarkers(){
         lineas = new PolylineOptions();
-        for (BeanIncidente incidente : incidentes)
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
@@ -209,7 +204,6 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
 
 ArrayList<ArrayList<LatLng>> circulos = new ArrayList<>();
         for(BeanIncidente incidente:incidentes){
-
             PolylineOptions poly = new PolylineOptions();
             ArrayList<LatLng> ll = new ArrayList<>();
             for(int i =0;i<incidente.getPuntos().size();i++){
@@ -246,9 +240,9 @@ ArrayList<ArrayList<LatLng>> circulos = new ArrayList<>();
                 if(incidente.getMotivo().getMot_titulo().toString().toLowerCase().equals("inundacion")) {
                     mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).icon(BitmapDescriptorFactory.fromResource(R.drawable.a)).title(incidente.getInc_titulo()).snippet(incidente.getInc_descripcion()));
                 }else if(incidente.getMotivo().getMot_titulo().toString().toLowerCase().equals("socavon")) {
-                    mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_comment)).title(incidente.getInc_titulo()).snippet(incidente.getInc_descripcion()));
+                    mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).icon(BitmapDescriptorFactory.fromResource(R.drawable.c)).title(incidente.getInc_titulo()).snippet(incidente.getInc_descripcion()));
                 }else{
-                    mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).title(incidente.getInc_titulo()).snippet(incidente.getInc_descripcion()));
+                    mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).icon(BitmapDescriptorFactory.fromResource(R.drawable.b)).title(incidente.getInc_titulo()).snippet(incidente.getInc_descripcion()));
 
                 }
                 int j = 0;
