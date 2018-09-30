@@ -37,11 +37,11 @@ public class FragmentRegister extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initControls();
-        initEvents((LoginActivity)(getActivity()));
+        initEvents((LoginActivity) (getActivity()));
         getActivity().setTitle("Registro");
     }
 
-    private void initControls(){
+    private void initControls() {
         edtEmailRegister = view.findViewById(R.id.edtEmailRegister);
         edtPassRegister = view.findViewById(R.id.edtPassRegister);
         edtNombreRegister = view.findViewById(R.id.edtNombreRegister);
@@ -51,18 +51,18 @@ public class FragmentRegister extends Fragment {
         btnFacebook = view.findViewWithTag(R.id.login_button);
     }
 
-    private void initEvents(final LoginActivity activity){
+    private void initEvents(final LoginActivity activity) {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 BeanUsuario usuario = new BeanUsuario();
-                if(TextUtils.isEmpty(edtEmailRegister.getText()) ||
-                    TextUtils.isEmpty(edtNombreRegister.getText()) ||
-                    TextUtils.isEmpty(edtApellidoRegister.getText())||
-                    TextUtils.isEmpty(edtEdadRegister.getText()) ||
-                    TextUtils.isEmpty(edtPassRegister.getText())){
+                if (TextUtils.isEmpty(edtEmailRegister.getText()) ||
+                        TextUtils.isEmpty(edtNombreRegister.getText()) ||
+                        TextUtils.isEmpty(edtApellidoRegister.getText()) ||
+                        TextUtils.isEmpty(edtEdadRegister.getText()) ||
+                        TextUtils.isEmpty(edtPassRegister.getText())) {
                     Toast.makeText(getContext(), "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     usuario.setUsu_correo(edtEmailRegister.getText().toString());
                     usuario.setUsu_nombre(edtNombreRegister.getText().toString());
                     usuario.setUsu_apellido(edtApellidoRegister.getText().toString());

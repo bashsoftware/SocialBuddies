@@ -20,6 +20,7 @@ public class ActivityContenido extends AppCompatActivity {
     public static final int PUBLICACION_REGISTRO = 2;
 
     public static final String PUBLICACION_COMENTARIOS_FILTRO = "PUBLICACION_COMENTARIOS_FILTRO";
+    public static final String PUBLICACION_FILTRO = "PUBLICACION_FILTRO";
 
     private FrameLayout frameLayout;
     private Toolbar toolbar;

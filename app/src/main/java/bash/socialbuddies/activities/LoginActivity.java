@@ -10,8 +10,10 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
+import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -46,6 +48,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         initControls();
         displayScreen(R.layout.login_activity_login);
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(getApplicationContext());
 
         fragmentActual = R.layout.login_activity_login;
 
@@ -190,7 +195,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        ((FragmentLogin)fragment).onActivityResult(requestCode,resultCode,data);
+        ((FragmentLogin) fragment).onActivityResult(requestCode, resultCode, data);
 
     }
 }

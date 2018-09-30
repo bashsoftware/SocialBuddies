@@ -1,8 +1,10 @@
 package bash.socialbuddies.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class BeanIncidente {
+public class BeanIncidente implements Serializable {
+
     private String inc_titulo;
     private String inc_descripcion;
     private String inc_fecha;
@@ -12,6 +14,10 @@ public class BeanIncidente {
     private BeanUbicacion ubicacion;
     private ArrayList<BeanUbicacion> puntos;
     private String inc_id;
+
+    Boolean meGusta;
+    Integer numLikes;
+    Integer numComentarios;
 
     public BeanIncidente() {
     }
@@ -86,5 +92,29 @@ public class BeanIncidente {
 
     public void setInc_id(String inc_id) {
         this.inc_id = inc_id;
+    }
+
+    public Boolean getMeGusta() {
+        return meGusta;
+    }
+
+    public void setMeGusta(Boolean meGusta) {
+        this.meGusta = meGusta;
+    }
+
+    public Integer getNumLikes() {
+        return numLikes;
+    }
+
+    public void setNumLikes(Integer numLikes) {
+        this.numLikes = numLikes;
+    }
+
+    public Integer getNumComentarios() {
+        return numComentarios;
+    }
+
+    public void setNumComentarios(Integer numComentarios) {
+        this.numComentarios = numComentarios;
     }
 }
