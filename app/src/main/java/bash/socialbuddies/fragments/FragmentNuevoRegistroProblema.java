@@ -18,7 +18,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import bash.socialbuddies.R;
 import bash.socialbuddies.activities.MapsActivityRegistro;

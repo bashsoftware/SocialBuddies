@@ -168,9 +168,9 @@ public class FragmentContenidoIncidente extends Fragment {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference(FirebaseReference.INCIDENTES);
 
         if (like) {
-            reference.child(beanPublicacion.getMotivo().getTipo()).child(beanPublicacion.getInc_id()).child(beanUsuario.getUsu_id()).setValue(true);
+            reference.child(beanPublicacion.getMotivo().getMot_tipo()).child(beanPublicacion.getInc_id()).child(beanUsuario.getUsu_id()).setValue(true);
         } else {
-            reference.child(beanPublicacion.getMotivo().getTipo()).child(beanPublicacion.getInc_id()).child(beanUsuario.getUsu_id()).setValue(null);
+            reference.child(beanPublicacion.getMotivo().getMot_tipo()).child(beanPublicacion.getInc_id()).child(beanUsuario.getUsu_id()).setValue(null);
         }
     }
 
