@@ -25,7 +25,7 @@ import bash.socialbuddies.beans.BeanMotivo;
 import bash.socialbuddies.interfaces.*;
 import bash.socialbuddies.utilities.FirebaseReference;
 
-public class FragmentBusqueda extends Fragment implements OnCallBackBusqueda {
+public class FragmentBusqueda extends Fragment implements OnCallBackBusqueda, OnCallBackSelTipo {
     private RecyclerView _recyclerTipos;
     private RecyclerView _recyclerIncidentes;
     private AdapterTipoMotivo _adapterTipoMotivo;
@@ -55,7 +55,7 @@ public class FragmentBusqueda extends Fragment implements OnCallBackBusqueda {
     public void onGetTipoMotivos(ArrayList<BeanMotivo> arrayMotivos) {
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         _recyclerTipos.setLayoutManager(horizontalLayoutManager);
-        _adapterTipoMotivo = new AdapterTipoMotivo(getActivity().getApplicationContext(), arrayMotivos);
+        _adapterTipoMotivo = new AdapterTipoMotivo(getActivity().getApplicationContext(), arrayMotivos, this);
         _recyclerTipos.setAdapter(_adapterTipoMotivo);
     }
 
@@ -65,6 +65,11 @@ public class FragmentBusqueda extends Fragment implements OnCallBackBusqueda {
         _recyclerIncidentes.setLayoutManager(horizontalLayoutManager);
         _adapterIncidentes = new AdapterIncidenteLista(getActivity().getApplicationContext(), arrayIncidentes);
         _recyclerIncidentes.setAdapter(_adapterIncidentes);
+
+    }
+
+    @Override
+    public void onSelectTipo(String clave) {
 
     }
 }

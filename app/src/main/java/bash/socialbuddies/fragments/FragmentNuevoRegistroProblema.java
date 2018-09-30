@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import bash.socialbuddies.R;
 import bash.socialbuddies.activities.MapsActivityRegistro;
+import bash.socialbuddies.beans.BeanIncidente;
 import bash.socialbuddies.beans.BeanMotivo;
 import bash.socialbuddies.beans.BeanUbicacion;
 import bash.socialbuddies.beans.BeanUsuario;
@@ -29,6 +30,7 @@ public class FragmentNuevoRegistroProblema extends Fragment {
     private Button coordenadas, enviar;
     private ArrayList<String> imgs;
     public static ArrayList<bash.socialbuddies.beans.BeanUbicacion> puntos;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -42,16 +44,16 @@ public class FragmentNuevoRegistroProblema extends Fragment {
 
         enviar.setOnClickListener(
                 new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                 validar();
-            }
-        });
+                    @Override
+                    public void onClick(View v) {
+                        validar();
+                    }
+                });
         coordenadas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(), MapsActivityRegistro.class);
-              i.putExtra("basura","basura");
+                i.putExtra("basura", "basura");
                 startActivity(i);
             }
         });
@@ -68,21 +70,21 @@ public class FragmentNuevoRegistroProblema extends Fragment {
             BeanUsuario usuario = Singleton.getInstancia().getBeanUsuario();
 
 
-          /*  BeanMotivo motivo = new BeanMotivo();
+            BeanMotivo motivo = new BeanMotivo();
             motivo.setTipo(descripcion.getText().toString());
             motivo.setTitulo(titulo.getText().toString());
 
-            beanIncidente incidente = new beanIncidente();
-            incidente.setInc_decripcion(descripcion.getText().toString());
+            BeanIncidente incidente = new BeanIncidente();
+            incidente.setInc_titulo(titulo.getText().toString());
+            incidente.setInc_descripcion(descripcion.getText().toString());
             incidente.setInc_imgs(imgs);
             incidente.setUbicacion(latLng);
             incidente.setUsuario(usuario);
             incidente.setMotivo(motivo);
             incidente.setPuntos(puntos);
-            incidente.setInc_decripcion(descripcion.getText().toString());
             db.child(FirebaseReference.INCIDENTES).push().setValue(incidente);
 
-            latLng = null;*/
+            latLng = null;
 
         }
     }

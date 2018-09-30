@@ -9,6 +9,12 @@ public class BeanIncidente {
     private BeanMotivo motivo;
     private BeanUsuario usuario;
     private ArrayList<String> inc_imgs;
+    private BeanUbicacion ubicacion;
+    private ArrayList<BeanUbicacion> puntos;
+    private String inc_id;
+
+    public BeanIncidente() {
+    }
 
     public String getInc_titulo() {
         return inc_titulo;
@@ -56,5 +62,29 @@ public class BeanIncidente {
 
     public void setInc_imgs(ArrayList<String> inc_imgs) {
         this.inc_imgs = inc_imgs;
+    }
+
+    public BeanUbicacion getUbicacion() {
+        return ubicacion;
+    }
+
+    public ArrayList<BeanUbicacion> getPuntos() {
+        return puntos;
+    }
+
+    public void setUbicacion(BeanUbicacion ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
+    public void setPuntos(ArrayList<BeanUbicacion> puntos) {
+        this.puntos = puntos;
+    }
+
+    public String getInc_id() {
+        return inc_id;
+    }
+
+    public void setInc_id(String inc_id) {
+        this.inc_id = inc_id;
     }
 }

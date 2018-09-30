@@ -8,21 +8,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import bash.socialbuddies.R;
 import bash.socialbuddies.beans.BeanMotivo;
+import bash.socialbuddies.fragments.FragmentBusqueda;
+import bash.socialbuddies.interfaces.OnCallBackSelTipo;
 
 public class AdapterTipoMotivo extends RecyclerView.Adapter<AdapterTipoMotivo.TipoListaView> {
     private ArrayList<BeanMotivo> _motivosArray = new ArrayList<>();
     private Context _context;
     private LayoutInflater _inflater;
-
-    public AdapterTipoMotivo(Context context, ArrayList<BeanMotivo> motivos) {
+    private OnCallBackSelTipo _callBack;
+    public AdapterTipoMotivo(Context context, ArrayList<BeanMotivo> motivos, FragmentBusqueda callBack) {
         _inflater = LayoutInflater.from(context);
         _context = context;
         _motivosArray = motivos;
+        _callBack = callBack;
     }
 
     @NonNull
@@ -33,9 +37,16 @@ public class AdapterTipoMotivo extends RecyclerView.Adapter<AdapterTipoMotivo.Ti
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterTipoMotivo.TipoListaView viewHolder, int position) {
+    public void onBindViewHolder(@NonNull AdapterTipoMotivo.TipoListaView viewHolder, final int position) {
         //viewHolder._imgIcono.setB
         viewHolder._txtNombre.setText(_motivosArray.get(position).getMot_titulo());
+
+        viewHolder._imgIcono.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(_context, "dawd" + _motivosArray.get(position).getMot_tipo(), Toast.LENGTH_SHORT);
+            }
+        });
     }
 
     @Override
