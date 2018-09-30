@@ -121,12 +121,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragment = new FragmentVacio();
                 break;
 
-            case R.id.main_activity_menu_drawer_config:
-                getSupportActionBar().setTitle("Configuración");
-                fragment = new FragmentVacio();
-                break;
             case R.id.main_activity_menu_drawer_nuevo:
-               fragment = new FragmentNuevoRegistroProblema();
+                fragment = new FragmentNuevoRegistroProblema();
                 break;
             case R.id.main_activity_menu_drawer__cerrar:
                 logout();
