@@ -194,7 +194,7 @@ public class MapsActivityLugares extends FragmentActivity implements OnMapReadyC
     }
     void setMarkers(){
         lineas = new PolylineOptions();
-        for (BeanIncidente incidente : incidentes)
+       // for (BeanIncidente incidente : incidentes)
             //mMap.addMarker(new MarkerOptions().position(new LatLng(incidente.getUbicacion().getLat(),incidente.getUbicacion().getLng())).title(incidente.getMotivo().getTipo()).snippet(incidente.getMotivo().getTitulo()));
        /* mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
