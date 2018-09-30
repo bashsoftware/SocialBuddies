@@ -8,6 +8,8 @@ public class beanIncidente {
     private BeanUsuario usuario;
     private BeanMotivo motivo;
 
+    private BeanUbicacion ubicacion;
+    private ArrayList<BeanUbicacion> puntos;
     public beanIncidente() {
     }
 
@@ -49,5 +51,20 @@ public class beanIncidente {
 
     public void setMotivo(BeanMotivo motivo) {
         this.motivo = motivo;
+    }
+    public BeanUbicacion getUbicacion() {
+        return ubicacion;
+    }
+
+    public ArrayList<BeanUbicacion> getPuntos() {
+        return puntos;
+    }
+
+    public void setUbicacion(BeanUbicacion ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
+    public void setPuntos(ArrayList<BeanUbicacion> puntos) {
+        this.puntos = puntos;
     }
 }
