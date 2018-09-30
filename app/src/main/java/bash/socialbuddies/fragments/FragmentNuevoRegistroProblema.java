@@ -134,7 +134,6 @@ public class FragmentNuevoRegistroProblema extends Fragment {
         beanIncidente.setInc_imgs(urls);
         beanIncidente.setUbicacion(latLng);
         beanIncidente.setPuntos(puntos);
-
         BeanMotivo motivo = new BeanMotivo();
         motivo.setMot_tipo(selected);
         motivo.setMot_titulo(titulo.getText().toString());
