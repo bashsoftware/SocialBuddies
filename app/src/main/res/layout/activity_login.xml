@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.LoginActivity"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/edtEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="@string/activity_login_edittext_email"
+        android:textAlignment="center"/>
+
+    <EditText
+        android:id="@+id/edtPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="@string/activity_login_edittext_contrasena"
+        android:textAlignment="center"/>
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/activity_login_button_inicia"/>
+
+    <TextView
+        android:id="@+id/txvRegistro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/activity_login_textview_registro"
+        android:padding="10dp"/>
+
+    <Button
+        android:id="@+id/btnFacebook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/activity_login_button_facebook"/>
+
+</LinearLayout>
