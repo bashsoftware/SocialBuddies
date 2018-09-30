@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,7 @@ public class FragmentBusqueda extends Fragment implements OnCallBackBusqueda, On
 
     private void initDataBase(){
         dbUtil = new DataBaseUtil();
-        dbUtil.obtieneIncidentes(this);
+        dbUtil.obtieneIncidentes(this, "");
         dbUtil.obtieneTiposMotivos(this);
 
     }
@@ -70,7 +71,8 @@ public class FragmentBusqueda extends Fragment implements OnCallBackBusqueda, On
 
     @Override
     public void onSelectTipo(String clave) {
-
+        _adapterIncidentes.clear();
+        dbUtil.obtieneIncidentes(this, clave);
     }
 }
 

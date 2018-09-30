@@ -46,17 +46,27 @@ public class DataBaseUtil {
     }
 
 
-    public void obtieneIncidentes(final FragmentBusqueda callback){
+    public void obtieneIncidentes(final FragmentBusqueda callback, final String clave){
         DatabaseReference ref = database.getReference().child(FirebaseReference.INCIDENTES);
 
+        if(clave.isEmpty()){
+            ref.child("clave");
+        }
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshots) {
                 final ArrayList<BeanIncidente> incidentes = new ArrayList<>();
 
                 for (DataSnapshot dataSnapshot : dataSnapshots.getChildren()){
-                    BeanIncidente post = dataSnapshot.getValue(BeanIncidente.class);
-                    incidentes.add(post);
+                    if(clave.isEmpty()) {
+                        for (DataSnapshot data : dataSnapshot.getChildren()) {
+                            BeanIncidente post = data.getValue(BeanIncidente.class);
+                            incidentes.add(post);
+                        }
+                    }else{
+                        BeanIncidente post = dataSnapshot.getValue(BeanIncidente.class);
+                        incidentes.add(post);
+                    }
                 }
 
                 callback.onGetIncidentes(incidentes);
