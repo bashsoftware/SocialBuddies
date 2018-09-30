@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context=".activities.LoginActivity">
 
-    <LinearLayout
+    <!--LinearLayout
         android:id="@+id/layDatos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,7 +15,7 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.6"
             android:orientation="vertical">
 
@@ -33,7 +33,6 @@
                 />
 
             <EditText
-                android:layout_below="@id/edtEmailRegister"
                 android:id="@+id/edtPassRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -47,22 +46,90 @@
 
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/imgPerfil"
-            android:layout_width="0dp"
-            android:layout_height="200px"
-            android:layout_weight="0.4"
-            android:layout_margin="10dp"
-            android:background="@color/textIcons"
-            android:src="@drawable/perfil"
-            android:scaleType="centerInside"/>
-
-    </LinearLayout>
 
 
+    </LinearLayout-->
+
+    <ImageView
+        android:id="@+id/imgEmail"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="8dp"
+        android:src="@drawable/email_icon"
+        android:tint="@color/colorPrimary" />
+
+    <ImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/edtEmailRegister"
+        android:layout_margin="8dp"
+        android:src="@drawable/pass_icon"
+        android:tint="@color/colorPrimary" />
+
+    <ImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/edtPassRegister"
+        android:layout_margin="8dp"
+        android:src="@drawable/name_icon"
+        android:tint="@color/colorPrimary" />
+
+    <ImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/edtNombreRegister"
+        android:layout_margin="8dp"
+        android:src="@drawable/name_icon"
+        android:tint="@color/colorPrimary" />
+
+    <ImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/edtApellidoRegister"
+        android:layout_margin="8dp"
+        android:src="@drawable/email_icon"
+        android:tint="@color/colorPrimary" />
+
+    <EditText
+        android:id="@+id/edtEmailRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:textAlignment="center"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorPrimary"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/imgEmail"
+        android:nextFocusForward="@id/edtPassRegister"
+        />
+
+    <EditText
+        android:layout_below="@id/edtEmailRegister"
+        android:id="@+id/edtPassRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Contraseña"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:textAlignment="center"
+        android:inputType="textPassword"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorPrimary"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/imgEmail"
+        android:nextFocusForward="@id/edtNombreRegister"/>
 
         <EditText
-            android:layout_below="@id/layDatos"
+            android:layout_below="@id/edtPassRegister"
             android:id="@+id/edtNombreRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -71,7 +138,10 @@
             android:padding="10dp"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
-            android:textColorHint="@color/colorPrimary"/>
+            android:textColorHint="@color/colorPrimary"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/imgEmail"
+            android:nextFocusForward="@id/edtApellidoRegister"/>
 
         <EditText
             android:layout_below="@id/edtNombreRegister"
@@ -83,7 +153,10 @@
             android:padding="10dp"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
-            android:textColorHint="@color/colorPrimary"/>
+            android:textColorHint="@color/colorPrimary"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/imgEmail"
+            android:nextFocusForward="@id/edtApellidoRegister"/>
 
         <EditText
             android:layout_below="@id/edtApellidoRegister"
@@ -96,18 +169,35 @@
             android:textAlignment="center"
             android:inputType="number"
             android:textColor="@color/colorPrimary"
-            android:textColorHint="@color/colorPrimary"/>
+            android:textColorHint="@color/colorPrimary"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/imgEmail"
+            android:nextFocusForward="@id/btnRegister"/>
+
+    <ImageButton
+        android:id="@+id/imgPerfil"
+        android:layout_below="@id/edtEdadRegister"
+        android:layout_height="250px"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:background="@color/transparent"
+        android:src="@drawable/perfil"
+        android:scaleType="centerInside"/>
 
 
 
         <Button
             android:id="@+id/btnRegister"
-            android:layout_below="@id/edtEdadRegister"
+            android:layout_below="@id/imgPerfil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Registrar"
             android:padding="10dp"
             android:layout_margin="10dp"
-            android:background="@drawable/radius_button"/>
+            android:background="@drawable/radius_button"
+            android:textColor="@color/textIcons"/>
+
+
+
 
 </RelativeLayout>
