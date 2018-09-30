@@ -1,5 +1,6 @@
 package bash.socialbuddies.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -52,7 +53,7 @@ public class FragmentLogin extends Fragment {
 
         callbackManager = CallbackManager.Factory.create();
 
-        loginButton.setReadPermissions(Arrays.asList("email"));
+        loginButton.setReadPermissions(Arrays.asList("email", "public_profile"));
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -66,7 +67,7 @@ public class FragmentLogin extends Fragment {
 
             @Override
             public void onError(FacebookException error) {
-                Toast.makeText(getContext(), "Error Login", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Error Login: " + error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -121,5 +122,11 @@ public class FragmentLogin extends Fragment {
             }
         });
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 }

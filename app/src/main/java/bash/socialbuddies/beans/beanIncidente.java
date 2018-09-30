@@ -2,7 +2,7 @@ package bash.socialbuddies.beans;
 
 import java.util.ArrayList;
 
-public class BeanIncidente {
+public class beanIncidente {
     private String inc_titulo;
     private String inc_descripcion;
     private String inc_fecha;
