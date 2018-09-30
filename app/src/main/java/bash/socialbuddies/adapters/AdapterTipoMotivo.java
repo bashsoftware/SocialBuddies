@@ -7,12 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 
@@ -26,6 +21,7 @@ public class AdapterTipoMotivo extends RecyclerView.Adapter<AdapterTipoMotivo.Ti
     private Context _context;
     private LayoutInflater _inflater;
     private OnCallBackSelTipo _callBack;
+
     public AdapterTipoMotivo(Context context, ArrayList<BeanMotivo> motivos, FragmentBusqueda callBack) {
         _inflater = LayoutInflater.from(context);
         _context = context;
@@ -44,8 +40,8 @@ public class AdapterTipoMotivo extends RecyclerView.Adapter<AdapterTipoMotivo.Ti
     public void onBindViewHolder(@NonNull AdapterTipoMotivo.TipoListaView viewHolder, final int position) {
         //viewHolder._imgIcono.setB
         viewHolder._txtNombre.setText(_motivosArray.get(position).getMot_titulo());
-        switch (_motivosArray.get(position).getMot_tipo()){
-            case "Choque":
+        switch (_motivosArray.get(position).getMot_tipo()) {
+            case "Choques":
                 viewHolder._imgIcono.setImageResource(R.drawable.ic_busca_carro);
                 break;
             case "Socavon":
