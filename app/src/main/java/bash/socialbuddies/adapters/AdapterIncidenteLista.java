@@ -46,7 +46,7 @@ public class AdapterIncidenteLista extends RecyclerView.Adapter<AdapterIncidente
         viewHolder._txtTitulo.setText(_incidentesArray.get(position).getInc_titulo());
         viewHolder._txtDescripcion.setText(_incidentesArray.get(position).getInc_descripcion());
         viewHolder._txtUsuNombre.setText(_incidentesArray.get(position).getUsuario().getUsu_nombre());
-        viewHolder._txtFecha.setText(_incidentesArray.get(position).getInc_fecha());
+        viewHolder._txtFecha.setText(String.valueOf(_incidentesArray.get(position).getInc_fecha()));
     }
 
     @Override

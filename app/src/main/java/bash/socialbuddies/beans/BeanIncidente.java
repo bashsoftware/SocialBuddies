@@ -7,7 +7,7 @@ public class BeanIncidente implements Serializable {
 
     private String inc_titulo;
     private String inc_descripcion;
-    private String inc_fecha;
+    private Long inc_fecha;
     private BeanMotivo motivo;
     private BeanUsuario usuario;
     private ArrayList<String> inc_imgs;
@@ -54,11 +54,11 @@ public class BeanIncidente implements Serializable {
         this.usuario = usuario;
     }
 
-    public String getInc_fecha() {
+    public Long getInc_fecha() {
         return inc_fecha;
     }
 
-    public void setInc_fecha(String inc_fecha) {
+    public void setInc_fecha(Long inc_fecha) {
         this.inc_fecha = inc_fecha;
     }
 

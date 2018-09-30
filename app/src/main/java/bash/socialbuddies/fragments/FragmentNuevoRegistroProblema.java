@@ -7,13 +7,18 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 import bash.socialbuddies.R;
 import bash.socialbuddies.activities.MapsActivityRegistro;
@@ -29,6 +34,8 @@ public class FragmentNuevoRegistroProblema extends Fragment {
     private EditText titulo, descripcion;
     private Button coordenadas, enviar;
     private ArrayList<String> imgs;
+    private Spinner spinner;
+    private ArrayList<String> sp;
     public static ArrayList<bash.socialbuddies.beans.BeanUbicacion> puntos;
 
     @Nullable
@@ -37,11 +44,20 @@ public class FragmentNuevoRegistroProblema extends Fragment {
         View view = inflater.inflate(R.layout.fragment_registro_problema, container, false);
         super.onCreate(savedInstanceState);
 
+        spinner = (Spinner) view.findViewById(R.id.fragment_registro_problema_spinner);
         titulo = (EditText) view.findViewById(R.id.fragment_registro_problema_titulo);
         descripcion = (EditText) view.findViewById(R.id.fragment_registro_problema_descripcion);
         coordenadas = (Button) view.findViewById(R.id.fragment_registro_problema_coordenadas);
         enviar = (Button) view.findViewById(R.id.fragment_registro_problema_enviar);
 
+        sp = new ArrayList<String>();
+        sp.add("Choques");
+        sp.add("Socavon");
+        sp.add("Inundacion");
+        ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(getActivity().getApplicationContext(),
+                android.R.layout.simple_spinner_dropdown_item,
+                sp);
+        spinner.setAdapter(spinnerArrayAdapter);
         enviar.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -71,7 +87,7 @@ public class FragmentNuevoRegistroProblema extends Fragment {
 
 
             BeanMotivo motivo = new BeanMotivo();
-            motivo.setMot_tipo(descripcion.getText().toString());
+            motivo.setMot_tipo(spinner.getSelectedItem().toString());
             motivo.setMot_titulo(titulo.getText().toString());
 
             BeanIncidente incidente = new BeanIncidente();
@@ -82,6 +98,9 @@ public class FragmentNuevoRegistroProblema extends Fragment {
             incidente.setUsuario(usuario);
             incidente.setMotivo(motivo);
             incidente.setPuntos(puntos);
+
+            Date currentTime = Calendar.getInstance().getTime();
+            incidente.setInc_fecha(currentTime.getTime());
             db.child(FirebaseReference.INCIDENTES).child(incidente.getMotivo().getMot_tipo()).push().setValue(incidente);
 
             latLng = null;
