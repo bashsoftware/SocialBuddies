@@ -6,23 +6,18 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.telecom.Call;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -42,15 +37,15 @@ public class LoginActivity extends AppCompatActivity {
 
     private int fragmentActual = 0;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initControls();
         displayScreen(R.layout.login_activity_login);
+
         fragmentActual = R.layout.login_activity_login;
-
-
 
         FirebaseAuth.getInstance().signOut();
         FirebaseAuth.getInstance().addAuthStateListener(new FirebaseAuth.AuthStateListener() {
@@ -91,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(fragmentActual != R.layout.login_activity_login){
+        if (fragmentActual != R.layout.login_activity_login) {
             displayScreen(R.layout.login_activity_login);
         }
     }
@@ -148,13 +143,13 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
-                        try{
+                        try {
                             BeanUsuario usuario = Singleton.getInstancia().getBeanUsuario();
                             //usuario.setUsu_nombre(response.getJSONObject().getString("first_name"));
                             //usuario.setUsu_apellido(response.getJSONObject().getString("last_name"));
                             usuario.setUsu_correo(response.getJSONObject().getString("email"));
                             usuario.setUsu_edad(18);
-                        }catch (Exception e){
+                        } catch (Exception e) {
 
                         }
 
