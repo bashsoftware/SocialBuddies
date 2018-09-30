@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,16 +18,25 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import bash.socialbuddies.R;
 import bash.socialbuddies.activities.MainActivity;
+import bash.socialbuddies.beans.BeanUsuario;
 import bash.socialbuddies.fragments.FragmentLogin;
 import bash.socialbuddies.fragments.FragmentRegister;
+import bash.socialbuddies.utilities.FirebaseReference;
+import bash.socialbuddies.utilities.Singleton;
 
 public class LoginActivity extends AppCompatActivity {
 
     private FrameLayout frmContainer;
     private FirebaseAuth auth;
+    private DatabaseReference database;
 
 
     @Override
@@ -39,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void initControls(){
         auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance().getReference();
         frmContainer = findViewById(R.id.container_login);
     }
 
@@ -75,15 +86,23 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void register(String email, String password){
-        auth.createUserWithEmailAndPassword(email, password)
+    public void register(final BeanUsuario usuario, String password){
+        auth.createUserWithEmailAndPassword(usuario.getUsu_correo(), password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
+                            usuario.setUsu_id(task.getResult().getUser().getUid());
+                            Singleton.getInstancia().setBeanUsuario(usuario);
+
+                            Map<String, Object> childUpdates = new HashMap<>();
+                            childUpdates.put("/" + FirebaseReference.USUARIO  + "/" + task, usuario.toMap());
+
+                            database.updateChildren(childUpdates);
                             displayScreen(R.layout.login_activity_login);
                         }else{
-                            Toast.makeText(getApplicationContext(),"Error al iniciar sesión", Toast.LENGTH_SHORT).show();
+                            //Log.d("dfd", );
+                            Toast.makeText(getApplicationContext(),"Error al iniciar sesión " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

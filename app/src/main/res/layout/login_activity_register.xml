@@ -23,7 +23,8 @@
             android:hint="Contraseña"
             android:layout_margin="10dp"
             android:padding="10dp"
-            android:textAlignment="center"/>
+            android:textAlignment="center"
+            android:inputType="textPassword"/>
 
         <EditText
             android:layout_below="@id/edtPassRegister"
@@ -53,7 +54,8 @@
             android:hint="Edad"
             android:layout_margin="10dp"
             android:padding="10dp"
-            android:textAlignment="center"/>
+            android:textAlignment="center"
+            android:inputType="number"/>
 
         <Button
             android:id="@+id/btnRegister"

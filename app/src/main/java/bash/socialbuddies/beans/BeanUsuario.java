@@ -1,11 +1,14 @@
 package bash.socialbuddies.beans;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class BeanUsuario {
 
     private String usu_id;
     private String usu_nombre;
     private String usu_apellido;
-    private String usu_edad;
+    private Integer usu_edad;
     private String usu_correo;
     private String usu_perfil;
 
@@ -33,11 +36,11 @@ public class BeanUsuario {
         this.usu_apellido = usu_apellido;
     }
 
-    public String getUsu_edad() {
+    public Integer getUsu_edad() {
         return usu_edad;
     }
 
-    public void setUsu_edad(String usu_edad) {
+    public void setUsu_edad(Integer usu_edad) {
         this.usu_edad = usu_edad;
     }
 
@@ -56,4 +59,14 @@ public class BeanUsuario {
     public void setUsu_perfil(String usu_perfil) {
         this.usu_perfil = usu_perfil;
     }
+
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("usu_nombre", usu_nombre);
+        result.put("usu_apellido", usu_apellido);
+        result.put("usu_correo", usu_correo);
+        result.put("usu_edad", usu_edad);
+        return result;
+    }
+
 }

@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import bash.socialbuddies.R;
 import bash.socialbuddies.activities.LoginActivity;
+import bash.socialbuddies.beans.BeanUsuario;
 
 public class FragmentRegister extends Fragment {
     private View view;
@@ -50,7 +51,12 @@ public class FragmentRegister extends Fragment {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                activity.register(edtEmailRegister.getText().toString(), edtPassRegister.getText().toString());
+                BeanUsuario usuario = new BeanUsuario();
+                usuario.setUsu_correo(edtEmailRegister.getText().toString());
+                usuario.setUsu_nombre(edtNombreRegister.getText().toString());
+                usuario.setUsu_apellido(edtApellidoRegister.getText().toString());
+                usuario.setUsu_edad(Integer.valueOf(edtEdadRegister.getText().toString()));
+                activity.register(usuario, edtPassRegister.getText().toString());
             }
         });
     }
